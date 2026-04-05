@@ -401,12 +401,12 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-image {
     order: 1;
-    flex: 0 0 250px;
+    flex: 0 0 200px;
   }
   
   .avatar {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
   }
   
   .hero-text h1 {
@@ -433,9 +433,7 @@ html:not(.dark) .navbar.scrolled {
   }
   
   .timeline-progress {
-    left: 30px;
-    margin-left: 0;
-    width: 3px !important;
+    display: none !important;
   }
   
   .timeline-item {
@@ -454,30 +452,30 @@ html:not(.dark) .navbar.scrolled {
   
   /* 3D项目展示 */
   .3d-marquee-container {
-    height: 400px !important;
-    overflow-x: auto !important;
+    height: 300px !important;
+    overflow-x: visible !important;
     overflow-y: hidden !important;
-    display: block !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     position: relative !important;
     z-index: 1 !important;
   }
   
   .3d-grid {
     flex-direction: row !important;
-    gap: 40px !important;
-    padding: 30px !important;
-    min-width: max-content !important;
+    gap: 20px !important;
+    padding: 20px !important;
     transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;
     display: flex !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
   }
   
   .3d-column {
     display: flex !important;
     flex-direction: column !important;
-    gap: 40px !important;
+    gap: 20px !important;
     flex: 0 0 auto !important;
   }
   
@@ -487,14 +485,14 @@ html:not(.dark) .navbar.scrolled {
   }
   
   .3d-item img {
-    width: 200px !important;
-    height: 133px !important;
+    width: 120px !important;
+    height: 80px !important;
     display: block !important;
   }
   
   .3d-item div {
-    font-size: 12px !important;
-    bottom: -20px !important;
+    font-size: 10px !important;
+    bottom: -15px !important;
     position: absolute !important;
     left: 0 !important;
     right: 0 !important;
@@ -594,26 +592,26 @@ html:not(.dark) .navbar.scrolled {
   
   /* 3D项目展示 */
   .3d-marquee-container {
-    height: 350px !important;
+    height: 250px !important;
   }
   
   .3d-grid {
-    gap: 30px !important;
-    padding: 20px !important;
+    gap: 15px !important;
+    padding: 15px !important;
   }
   
   .3d-column {
-    gap: 30px !important;
+    gap: 15px !important;
   }
   
   .3d-item img {
-    width: 150px !important;
-    height: 100px !important;
+    width: 100px !important;
+    height: 67px !important;
   }
   
   .3d-item div {
-    font-size: 10px !important;
-    bottom: -15px !important;
+    font-size: 8px !important;
+    bottom: -12px !important;
   }
   
   /* 项目卡片 */
