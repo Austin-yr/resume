@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题切换测试</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        body.light .theme-toggle {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            color: #000;
+        }
+    </style>
+</head>
+<body class="light">
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+    <h1>主题切换测试</h1>
+    <p>点击上面的按钮来切换主题</p>
+    
+    <script>
+        function toggleTheme() {
+            console.log('toggleTheme called');
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle i');
+            
+            // 切换主题类
+            body.classList.toggle('dark');
+            body.classList.toggle('light');
+            
+            // 更新图标
+            if (body.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+                console.log('Switched to dark theme');
+            } else {
+                icon.className = 'fas fa-moon';
+                console.log('Switched to light theme');
+            }
+        }
+    </script>
+</body>
+</html>

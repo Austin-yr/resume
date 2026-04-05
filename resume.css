@@ -87,6 +87,62 @@
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+/* 浅色主题 */
+html:not(.dark) {
+  /* 浅色主题颜色方案 - 高级华丽风格 */
+  --color-primary: #2c3e70; /* 更优雅的深蓝色，带紫色调 */
+  --color-primary-dark: #1a254f; /* 更深的主色调 */
+  --color-primary-light: #34498e; /* 更亮的主色调 */
+  --color-secondary: #4ecdc4; /* 柔和的蓝绿色 */
+  --color-secondary-dark: #26a69a; /* 更深的辅助色 */
+  --color-secondary-light: #6ee7b7; /* 更亮的辅助色 */
+  --color-accent: #b8860b; /* 高级金色 */
+  --color-accent-dark: #8b4513; /* 更深的强调色 */
+  --color-accent-light: #d4af37; /* 更亮的强调色 */
+  --color-success: #38a169; /* 更柔和的绿色 */
+  --color-warning: #ed8936; /* 更温暖的橙色 */
+  --color-error: #e53e3e; /* 更鲜艳的红色 */
+  --color-info: #4299e1; /* 更明亮的蓝色 */
+  --color-background: #f8f9fa; /* 更温暖的白色 */
+  --color-background-alt: #f1f3f5; /* 更柔和的背景色 */
+  --color-surface: #ffffff; /* 纯白表面 */
+  --color-surface-alt: #fafbfc; /* 更温暖的表面色 */
+  --color-text: #1a202c; /* 更深的文本色 */
+  --color-text-secondary: #4a5568; /* 次要文本色 */
+  --color-text-tertiary: #718096; /*  tertiary文本色 */
+  --color-border: #e2e8f0; /* 更柔和的边框色 */
+  --color-border-light: #f7fafc; /* 更亮的边框色 */
+  --color-border-dark: #cbd5e0; /* 更深的边框色 */
+}
+
+/* 深色主题 */
+html.dark {
+  /* 深色主题颜色方案 */
+  --color-primary: #00FFFF;
+  --color-primary-dark: #00CCCC;
+  --color-primary-light: #66FFFF;
+  --color-secondary: #FF00FF;
+  --color-secondary-dark: #CC00CC;
+  --color-secondary-light: #FF66FF;
+  --color-accent: #FFFF00;
+  --color-accent-dark: #CCCC00;
+  --color-accent-light: #FFFF66;
+  --color-success: #00FF00;
+  --color-warning: #FFA500;
+  --color-error: #FF0000;
+  --color-info: #0000FF;
+  --color-background: #0A0E17;
+  --color-background-alt: #121827;
+  --color-surface: #1E293B;
+  --color-surface-alt: #334155;
+  --color-text: #FFFFFF;
+  --color-text-secondary: #CBD5E1;
+  --color-text-tertiary: #94A3B8;
+  --color-border: #334155;
+  --color-border-light: #475569;
+  --color-border-dark: #1E293B;
+}
+
 /* 全局样式 */
 * {
   margin: 0;
@@ -190,9 +246,24 @@ section {
   border-bottom: 1px solid rgba(0, 255, 255, 0.2);
 }
 
+/* 浅色主题下的导航栏 */
+html:not(.dark) .navbar {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.95));
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(78, 205, 196, 0.2);
+  backdrop-filter: blur(10px);
+}
+
 .navbar.scrolled {
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
   border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* 浅色主题下的导航栏滚动效果 */
+html:not(.dark) .navbar.scrolled {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 249, 250, 0.98));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(78, 205, 196, 0.3);
 }
 
 .navbar .container {
@@ -966,6 +1037,13 @@ section {
   border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
+/* 浅色主题下的技能卡片 */
+html:not(.dark) .skill-item {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+  border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
 .skill-item::before {
   content: '';
   position: absolute;
@@ -1358,9 +1436,20 @@ section {
   z-index: 1;
 }
 
+/* 浅色主题下的时间线内容 */
+html:not(.dark) .timeline-content {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 102, 255, 0.2);
+}
+
 .timeline-content:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+}
+
+/* 浅色主题下的时间线内容悬停效果 */
+html:not(.dark) .timeline-content:hover {
+  box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
 }
 
 /* 详细信息 */
@@ -1379,6 +1468,13 @@ section {
   transition: all 0.3s ease;
   z-index: 1;
   min-height: 100%;
+}
+
+/* 浅色主题下的详细信息 */
+html:not(.dark) .timeline-details {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 102, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
 }
 
 /* 奇数项的详细信息在右侧 */
@@ -1459,6 +1555,11 @@ section {
   line-height: 1.6;
 }
 
+/* 浅色主题下的详细信息文字颜色 */
+html:not(.dark) .timeline-details p {
+  color: #4a637a;
+}
+
 .timeline-details p:last-child {
   margin-bottom: 0;
 }
@@ -1473,10 +1574,25 @@ section {
   padding-bottom: 1px;
 }
 
+/* 浅色主题下的关键词高亮样式 */
+html:not(.dark) .highlight {
+  color: #2c3e50;
+  text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+  border-bottom: 2px solid #3498db;
+}
+
 .highlight:hover {
   color: #00CCCC;
   text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
   border-bottom-color: #00CCCC;
+  transform: translateY(-1px);
+}
+
+/* 浅色主题下的关键词高亮悬停样式 */
+html:not(.dark) .highlight:hover {
+  color: #1a252f;
+  text-shadow: 0 0 15px rgba(52, 152, 219, 0.8);
+  border-bottom-color: #2980b9;
   transform: translateY(-1px);
 }
 
@@ -1728,6 +1844,13 @@ section {
   border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
+/* 浅色主题下的教育模块卡片 */
+html:not(.dark) .education-item {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 25px rgba(52, 152, 219, 0.25);
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
 .education-item:nth-child(1) {
   animation-delay: 0.2s;
 }
@@ -1800,6 +1923,12 @@ section {
   z-index: 1;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
   overflow: hidden;
+}
+
+/* 浅色主题下的教育日期 */
+html:not(.dark) .education-date {
+  border: 1px solid rgba(52, 152, 219, 0.4);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.3);
 }
 
 .education-date::before {
@@ -1975,10 +2104,23 @@ section {
   white-space: nowrap;
 }
 
+/* 浅色主题下的证书荣誉卡片 */
+html:not(.dark) .certificate-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(52, 152, 219, 0.2);
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+}
+
 .certificate-item:hover {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
   border-color: rgba(0, 255, 255, 0.4);
+}
+
+/* 浅色主题下的证书荣誉卡片悬停效果 */
+html:not(.dark) .certificate-item:hover {
+  box-shadow: 0 0 25px rgba(52, 152, 219, 0.4);
+  border-color: rgba(52, 152, 219, 0.4);
 }
 
 .certificate-item i {
@@ -2096,6 +2238,13 @@ section {
   border: 1px solid rgba(0, 255, 255, 0.2);
   transform-style: preserve-3d;
   perspective: 1000px;
+}
+
+/* 浅色主题下的 bento 卡片 */
+html:not(.dark) .bento-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 32px rgba(0, 102, 255, 0.15);
+  border: 1px solid rgba(0, 102, 255, 0.2);
 }
 
 .bento-card::before {
@@ -2322,6 +2471,18 @@ section {
   border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
+/* 深色主题下的项目卡片 */
+html.dark .project-card {
+  background-color: rgba(45, 55, 72, 0.95);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+/* 深色主题下的项目卡片悬停效果 */
+html.dark .project-card:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+  border-color: rgba(0, 255, 255, 0.4);
+}
+
 .project-card:nth-child(1) {
   animation-delay: 0.2s;
 }
@@ -2379,7 +2540,7 @@ section {
 .project-card h3 {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
-  color: black;
+  color: var(--color-text);
   margin-bottom: var(--spacing-4);
   transition: all var(--duration-fast) var(--ease-in-out);
   position: relative;
@@ -2589,7 +2750,7 @@ section {
   align-items: center;
   gap: var(--spacing-4);
   margin-bottom: var(--spacing-6);
-  transform: translateZ(20px);
+  transform: translateZ(0);
 }
 
 .card-3d-icon {
@@ -2623,11 +2784,11 @@ section {
 }
 
 .card-3d .project-info {
-  transform: translateZ(15px);
+  transform: translateZ(0);
 }
 
 .card-3d p {
-  transform: translateZ(10px);
+  transform: translateZ(0);
   margin-bottom: var(--spacing-6);
   color: #000000;
   line-height: var(--line-height-relaxed);
