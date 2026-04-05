@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="resume.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -40,7 +40,7 @@
             const updateThemeIcon = () => {
                 const isDark = document.documentElement.classList.contains('dark');
                 console.log('updateThemeIcon, isDark:', isDark);
-                themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
             };
             
             // 切换主题
@@ -380,8 +380,8 @@
                 <li><a href="#projects">项目经验</a></li>
                 <li><a href="#bento">个人优势</a></li>
             </ul>
-            <button id="theme-toggle-button" class="theme-toggle-button" style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; transition: all 0.3s ease; margin-left: 20px; z-index: 1000; position: relative;" onclick="var html = document.documentElement; var icon = this.querySelector('i'); html.classList.toggle('dark'); if (html.classList.contains('dark')) { icon.className = 'fas fa-sun'; this.style.color = '#fff'; this.style.background = 'rgba(255, 255, 255, 0.1)'; this.style.border = '1px solid rgba(255, 255, 255, 0.3)'; } else { icon.className = 'fas fa-moon'; this.style.color = '#2c3e50'; this.style.background = 'rgba(200, 200, 200, 0.1)'; this.style.border = '1px solid rgba(52, 152, 219, 0.3)'; } localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');">
-                <i class="fas fa-moon"></i>
+            <button id="theme-toggle-button" class="theme-toggle-button" style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; transition: all 0.3s ease; margin-left: 20px; z-index: 1000; position: relative;" onclick="var html = document.documentElement; var icon = this.querySelector('i'); html.classList.toggle('dark'); if (html.classList.contains('dark')) { icon.className = 'fa-solid fa-sun'; this.style.color = '#fff'; this.style.background = 'rgba(255, 255, 255, 0.1)'; this.style.border = '1px solid rgba(255, 255, 255, 0.3)'; } else { icon.className = 'fa-solid fa-moon'; this.style.color = '#2c3e50'; this.style.background = 'rgba(200, 200, 200, 0.1)'; this.style.border = '1px solid rgba(52, 152, 219, 0.3)'; } localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');">
+                <i class="fa-solid fa-moon"></i>
                 <span class="sr-only">Toggle theme</span>
             </button>
             <script>
@@ -395,13 +395,13 @@
                     var savedTheme = localStorage.getItem('theme');
                     if (savedTheme === 'dark') {
                         html.classList.add('dark');
-                        icon.className = 'fas fa-sun';
+                        icon.className = 'fa-solid fa-sun';
                         button.style.color = '#fff';
                         button.style.background = 'rgba(255, 255, 255, 0.1)';
                         button.style.border = '1px solid rgba(255, 255, 255, 0.3)';
                     } else {
                         html.classList.remove('dark');
-                        icon.className = 'fas fa-moon';
+                        icon.className = 'fa-solid fa-moon';
                         button.style.color = '#2c3e50';
                         button.style.background = 'rgba(200, 200, 200, 0.1)';
                         button.style.border = '1px solid rgba(52, 152, 219, 0.3)';
@@ -2124,14 +2124,14 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 html.classList.add('dark');
-                icon.className = 'fas fa-sun';
+                icon.className = 'fa-solid fa-sun';
                 if (themeToggleButton) {
                     themeToggleButton.style.color = '#fff';
                     themeToggleButton.style.background = 'rgba(255, 255, 255, 0.1)';
                     themeToggleButton.style.border = '1px solid rgba(255, 255, 255, 0.3)';
                 }
             } else {
-                icon.className = 'fas fa-moon';
+                icon.className = 'fa-solid fa-moon';
                 if (themeToggleButton) {
                     themeToggleButton.style.color = '#2c3e50';
                     themeToggleButton.style.background = 'rgba(200, 200, 200, 0.1)';
