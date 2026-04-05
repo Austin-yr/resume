@@ -428,12 +428,12 @@ html:not(.dark) .navbar.scrolled {
   
   /* 工作经历时间线 */
   .timeline::after {
-    left: 31px;
+    left: 30px;
   }
   
   .timeline-progress {
-    left: 31px;
-    margin-left: -1.5px;
+    left: 30px;
+    margin-left: 0;
   }
   
   .timeline-item {
@@ -452,27 +452,36 @@ html:not(.dark) .navbar.scrolled {
   
   /* 3D项目展示 */
   .3d-marquee-container {
-    height: 600px !important;
+    height: 400px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
   }
   
   .3d-grid {
-    flex-direction: column !important;
+    flex-direction: row !important;
     gap: 40px !important;
     padding: 30px !important;
+    min-width: max-content !important;
+  }
+  
+  .3d-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 40px !important;
   }
   
   .3d-item {
-    margin-bottom: 40px !important;
+    margin-bottom: 0 !important;
   }
   
   .3d-item img {
-    width: 250px !important;
-    height: 167px !important;
+    width: 200px !important;
+    height: 133px !important;
   }
   
   .3d-item div {
-    font-size: 14px !important;
-    bottom: -25px !important;
+    font-size: 12px !important;
+    bottom: -20px !important;
   }
   
   /* 项目卡片 */
@@ -558,7 +567,7 @@ html:not(.dark) .navbar.scrolled {
   
   /* 3D项目展示 */
   .3d-marquee-container {
-    height: 500px !important;
+    height: 350px !important;
   }
   
   .3d-grid {
@@ -566,18 +575,18 @@ html:not(.dark) .navbar.scrolled {
     padding: 20px !important;
   }
   
-  .3d-item {
-    margin-bottom: 30px !important;
+  .3d-column {
+    gap: 30px !important;
   }
   
   .3d-item img {
-    width: 200px !important;
-    height: 133px !important;
+    width: 150px !important;
+    height: 100px !important;
   }
   
   .3d-item div {
-    font-size: 12px !important;
-    bottom: -20px !important;
+    font-size: 10px !important;
+    bottom: -15px !important;
   }
   
   /* 项目卡片 */
