@@ -401,39 +401,12 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-image {
     order: 1;
-    flex: 0 0 280px;
+    flex: 0 0 250px;
   }
   
   .avatar {
-    width: 280px;
-    height: 280px;
-  }
-  
-  .hero-text h1 {
-    font-size: var(--font-size-4xl);
-  }
-  
-  .hero-text h2 {
-    font-size: var(--font-size-xl);
-  }
-  
-  .contact-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar .container {
-    padding: var(--spacing-3) var(--spacing-4);
-  }
-  
-  .hero {
-    padding: var(--spacing-20) 0 var(--spacing-16);
+    width: 250px;
+    height: 250px;
   }
   
   .hero-text h1 {
@@ -444,8 +417,104 @@ html:not(.dark) .navbar.scrolled {
     font-size: var(--font-size-lg);
   }
   
-  .hero-text p {
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* 工作经历时间线 */
+  .timeline::after {
+    left: 31px;
+  }
+  
+  .timeline-progress {
+    left: 31px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 0;
+  }
+  
+  .timeline-item:nth-child(odd) {
+    left: 0;
+  }
+  
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+  
+  /* 3D项目展示 */
+  .projects-3d-container {
+    height: 400px;
+  }
+  
+  .marquee-group {
+    width: 150px;
+  }
+  
+  .marquee-item {
+    width: 150px;
+    height: 100px;
+  }
+  
+  /* 项目卡片 */
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 个人优势Bento布局 */
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bento-card.large,
+  .bento-card.medium {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+  
+  /* 教育背景 */
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 页脚 */
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 主题切换按钮 */
+  .theme-toggle-button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .container {
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+  
+  .hero {
+    padding: var(--spacing-16) 0 var(--spacing-12);
+  }
+  
+  .hero-text h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .hero-text h2 {
     font-size: var(--font-size-base);
+  }
+  
+  .hero-text p {
+    font-size: var(--font-size-sm);
   }
   
   .social-links {
@@ -453,11 +522,81 @@ html:not(.dark) .navbar.scrolled {
   }
   
   .interactive-hover-button {
-    padding: var(--spacing-3) var(--spacing-6);
+    padding: var(--spacing-2) var(--spacing-4);
   }
   
   .container {
-    padding: 0 var(--spacing-4);
+    padding: 0 var(--spacing-3);
+  }
+  
+  /* 个人头像 */
+  .hero-image {
+    flex: 0 0 200px;
+  }
+  
+  .avatar {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* 工作经历时间线 */
+  .timeline-item {
+    padding-left: 60px;
+  }
+  
+  /* 3D项目展示 */
+  .projects-3d-container {
+    height: 300px;
+  }
+  
+  .marquee-group {
+    width: 120px;
+  }
+  
+  .marquee-item {
+    width: 120px;
+    height: 80px;
+  }
+  
+  /* 项目卡片 */
+  .project-card {
+    padding: var(--spacing-6);
+  }
+  
+  /* 个人优势Bento布局 */
+  .bento-card {
+    padding: var(--spacing-6);
+  }
+  
+  /* 技能部分 */
+  .icon-cloud-container {
+    height: 200px;
+  }
+  
+  #icon-cloud canvas {
+    max-width: 250px;
+    max-height: 250px;
+  }
+  
+  /* 教育背景 */
+  .education-card {
+    padding: var(--spacing-6);
+  }
+  
+  /* 页脚 */
+  .footer-content {
+    gap: var(--spacing-8);
+  }
+  
+  .footer-info {
+    padding: var(--spacing-6);
+  }
+  
+  /* 主题切换按钮 */
+  .theme-toggle-button {
+    font-size: 10px;
+    padding: 4px 8px;
+    margin-left: 10px;
   }
 }
 
