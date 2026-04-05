@@ -435,6 +435,7 @@ html:not(.dark) .navbar.scrolled {
   .timeline-progress {
     left: 30px;
     margin-left: 0;
+    width: 3px !important;
   }
   
   .timeline-item {
@@ -459,6 +460,8 @@ html:not(.dark) .navbar.scrolled {
     display: block !important;
     align-items: flex-start !important;
     justify-content: flex-start !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
   
   .3d-grid {
@@ -467,36 +470,45 @@ html:not(.dark) .navbar.scrolled {
     padding: 30px !important;
     min-width: max-content !important;
     transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
   }
   
   .3d-column {
     display: flex !important;
     flex-direction: column !important;
     gap: 40px !important;
+    flex: 0 0 auto !important;
   }
   
   .3d-item {
     margin-bottom: 0 !important;
+    position: relative !important;
   }
   
   .3d-item img {
     width: 200px !important;
     height: 133px !important;
+    display: block !important;
   }
   
   .3d-item div {
     font-size: 12px !important;
     bottom: -20px !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
   }
   
   /* 隐藏滚动条但保留滚动功能 */
   .3d-marquee-container::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
   
   .3d-marquee-container {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
   
   /* 项目卡片 */
@@ -567,12 +579,12 @@ html:not(.dark) .navbar.scrolled {
   
   /* 个人头像 */
   .hero-image {
-    flex: 0 0 200px;
+    flex: 0 0 180px;
   }
   
   .avatar {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
   
   /* 工作经历时间线 */
