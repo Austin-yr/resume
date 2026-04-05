@@ -143,77 +143,11 @@ html.dark {
   --color-border-dark: #1E293B;
 }
 
-/* 基础样式重置 */
+/* 全局样式 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* 缩放优化 */
-html {
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  touch-action: manipulation;
-}
-
-/* 确保图片按比例缩放 */
-img {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* 确保视频按比例缩放 */
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* 确保表格在缩放时不会溢出 */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  word-wrap: break-word;
-}
-
-/* 确保代码块在缩放时不会溢出 */
-pre, code {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-
-/* 确保按钮和链接在缩放时仍然可点击 */
-button, a {
-  touch-action: manipulation;
-  cursor: pointer;
-}
-
-/* 确保表单元素在缩放时正常显示 */
-input, textarea, select {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* 确保卡片和容器在缩放时不会溢出 */
-.card, .container, .project-card, .bento-card, .education-card {
-  max-width: 100%;
-  overflow: hidden;
-}
-
-/* 优化触摸事件 */
-* {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-/* 允许文本选择 */
-p, h1, h2, h3, h4, h5, h6, span, div {
-  -webkit-user-select: text;
-  user-select: text;
 }
 
 body {
@@ -448,6 +382,7 @@ html:not(.dark) .navbar.scrolled {
 
 /* 响应式导航栏 */
 @media (max-width: 768px) {
+  /* 导航栏 */
   .nav-links {
     display: none;
   }
@@ -456,6 +391,7 @@ html:not(.dark) .navbar.scrolled {
     display: block;
   }
   
+  /* 个人简介区 */
   .hero-content {
     flex-direction: column;
     text-align: center;
@@ -490,6 +426,24 @@ html:not(.dark) .navbar.scrolled {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+  
+  /* 技能部分 */
+  .skills-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+  
+  .icon-cloud-container {
+    height: 350px;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .skill-item {
+    padding: var(--spacing-6);
   }
   
   /* 工作经历时间线 */
@@ -534,6 +488,10 @@ html:not(.dark) .navbar.scrolled {
     grid-template-columns: 1fr;
   }
   
+  .project-card {
+    padding: var(--spacing-8);
+  }
+  
   /* 个人优势Bento布局 */
   .bento-grid {
     grid-template-columns: 1fr;
@@ -545,9 +503,17 @@ html:not(.dark) .navbar.scrolled {
     grid-column: span 1;
   }
   
+  .bento-card {
+    padding: var(--spacing-8);
+  }
+  
   /* 教育背景 */
   .education-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .education-card {
+    padding: var(--spacing-8);
   }
   
   /* 页脚 */
@@ -555,18 +521,36 @@ html:not(.dark) .navbar.scrolled {
     grid-template-columns: 1fr;
   }
   
+  .footer-info {
+    padding: var(--spacing-8);
+  }
+  
   /* 主题切换按钮 */
   .theme-toggle-button {
     font-size: 12px;
     padding: 6px 12px;
   }
+  
+  /* 项目详情模态框 */
+  .project-detail-modal {
+    max-width: 90%;
+    max-height: 90vh;
+  }
+  
+  /* 确保所有交互元素有足够的触摸区域 */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 @media (max-width: 480px) {
+  /* 导航栏 */
   .navbar .container {
     padding: var(--spacing-2) var(--spacing-3);
   }
   
+  /* 个人简介区 */
   .hero {
     padding: var(--spacing-16) 0 var(--spacing-12);
   }
@@ -605,9 +589,35 @@ html:not(.dark) .navbar.scrolled {
     height: 200px;
   }
   
+  /* 技能部分 */
+  .icon-cloud-container {
+    height: 200px;
+  }
+  
+  #icon-cloud canvas {
+    max-width: 250px;
+    max-height: 250px;
+  }
+  
+  .skill-item {
+    padding: var(--spacing-4);
+  }
+  
+  .skill-header h3 {
+    font-size: var(--font-size-lg);
+  }
+  
   /* 工作经历时间线 */
   .timeline-item {
     padding-left: 60px;
+  }
+  
+  .timeline-content {
+    padding: var(--spacing-4);
+  }
+  
+  .timeline-content h3 {
+    font-size: var(--font-size-lg);
   }
   
   /* 3D项目展示 */
@@ -629,24 +639,26 @@ html:not(.dark) .navbar.scrolled {
     padding: var(--spacing-6);
   }
   
+  .project-card h3 {
+    font-size: var(--font-size-lg);
+  }
+  
   /* 个人优势Bento布局 */
   .bento-card {
     padding: var(--spacing-6);
   }
   
-  /* 技能部分 */
-  .icon-cloud-container {
-    height: 200px;
-  }
-  
-  #icon-cloud canvas {
-    max-width: 250px;
-    max-height: 250px;
+  .bento-card h3 {
+    font-size: var(--font-size-lg);
   }
   
   /* 教育背景 */
   .education-card {
     padding: var(--spacing-6);
+  }
+  
+  .education-card h3 {
+    font-size: var(--font-size-lg);
   }
   
   /* 页脚 */
@@ -658,11 +670,43 @@ html:not(.dark) .navbar.scrolled {
     padding: var(--spacing-6);
   }
   
+  .footer-info h3 {
+    font-size: var(--font-size-xl);
+  }
+  
   /* 主题切换按钮 */
   .theme-toggle-button {
     font-size: 10px;
     padding: 4px 8px;
     margin-left: 10px;
+  }
+  
+  /* 项目详情模态框 */
+  .project-detail-modal {
+    max-width: 95%;
+    max-height: 95vh;
+    padding: var(--spacing-4);
+  }
+  
+  .project-detail-modal h3 {
+    font-size: var(--font-size-xl);
+  }
+  
+  /* 确保所有交互元素有足够的触摸区域 */
+  button, a {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* 优化滚动体验 */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+  
+  /* 禁用双击缩放 */
+  * {
+    touch-action: manipulation;
   }
 }
 
