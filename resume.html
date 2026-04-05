@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="resume.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script>
+        // 简化的cn函数
+        function cn(...classes) {
+            return classes.filter(Boolean).join(' ');
+        }
+        
+        // OrbitingCircles组件
+        function OrbitingCircles({ className, children, reverse, duration = 20, radius = 160, path = true, iconSize = 30, speed = 1, ...props }) {
+            const calculatedDuration = duration / speed;
+            return (
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    {path && (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            version="1.1"
+                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+                        >
+                            <circle
+                                style={{ stroke: 'rgba(0, 0, 0, 0.1)', strokeWidth: 1, fill: 'none' }}
+                                cx="50%"
+                                cy="50%"
+                                r={radius}
+                            />
+                        </svg>
+                    )}
+                    {React.Children.map(children, (child, index) => {
+                        const angle = (360 / React.Children.count(children)) * index;
+                        return (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    width: `${iconSize}px`,
+                                    height: `${iconSize}px`,
+                                    animation: `orbit ${calculatedDuration}s linear infinite`,
+                                    animationDirection: reverse ? 'reverse' : 'normal',
+                                    '--radius': `${radius}px`
+                                }}
+                                className={className}
+                                {...props}
+                            >
+                                {child}
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        }
+        
+        // 技能图标组件
+        function SkillIcon({ icon, color, label }) {
+            return (
+                <div
+                    style={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        padding: '8px',
+                        borderRadius: '8px',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                    title={label}
+                >
+                    <i
+                        className={`fas ${icon}`}
+                        style={{
+                            fontSize: '20px',
+                            color: color,
+                            marginBottom: '4px'
+                        }}
+                    />
+                    <span
+                        style={{
+                            fontSize: '10px',
+                            color: '#333',
+                            fontWeight: '600'
+                        }}
+                    >
+                        {label}
+                    </span>
+                </div>
+            );
+        }
+        
+        // 主组件
+        function App() {
+            return (
+                <OrbitingCircles radius={120} duration={25} iconSize={60}>
+                    <SkillIcon icon="fa-code" color="#007acc" label="React" />
+                    <SkillIcon icon="fa-js-square" color="#f7df1e" label="JavaScript" />
+                    <SkillIcon icon="fa-css3-alt" color="#264de4" label="CSS" />
+                    <SkillIcon icon="fa-html5" color="#e34f26" label="HTML" />
+                    <SkillIcon icon="fa-react" color="#61dafb" label="TypeScript" />
+                    <SkillIcon icon="fa-node" color="#339933" label="Node.js" />
+                </OrbitingCircles>
+            );
+        }
+        
+        // 渲染组件
+        window.onload = function() {
+            try {
+                ReactDOM.render(
+                    <App />,
+                    document.getElementById('orbiting-circles-container')
+                );
+            } catch (error) {
+                console.error('Error rendering OrbitingCircles:', error);
+            }
+        };
+    </script>
+    <style>
+        /* 旋转技能图标样式 */
+        .orbiting-skills {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            z-index: 1;
+        }
+        
+        .skill-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: orbit 25s linear infinite;
+        }
+        
+        .skill-icon i {
+            font-size: 40px;
+            margin-bottom: 6px;
+        }
+        
+        .skill-icon span {
+            font-size: 14px;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes orbit {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(200px) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg) translateY(200px) rotate(-360deg);
+            }
+        }
+        
+        @keyframes orbit-outer {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(280px) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg) translateY(280px) rotate(-360deg);
+            }
+        }
+        
+        .skill-icon.outer {
+            animation: orbit-outer 30s linear infinite reverse;
+        }
+
+        .images-badge-container {
+            display: inline-flex;
+            cursor: pointer;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .folder-container {
+            position: relative;
+            width: 32px;
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .folder-inner {
+            position: relative;
+            width: 32px;
+            height: 24px;
+        }
+        
+        .folder-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 4px;
+            background: linear-gradient(to bottom, #fbbf24, #f59e0b);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .folder-tab {
+            position: absolute;
+            left: 2px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            background: linear-gradient(to bottom, #fcd34d, #fbbf24);
+            width: 12px;
+            height: 6px;
+            top: -4px;
+        }
+        
+        .badge-image {
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform-origin: bottom center;
+            overflow: hidden;
+            border-radius: 3px;
+            background: white;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .badge-image img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .folder-front {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 85%;
+            transform-origin: bottom;
+            border-radius: 4px;
+            background: linear-gradient(to bottom, #fcd34d, #fbbf24);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+        }
+        
+        .folder-front::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            left: 4px;
+            height: 1px;
+            background: rgba(252, 211, 77, 0.5);
+        }
+        
+        .badge-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            font-family: 'Playfair Display', 'Inter', serif;
+            letter-spacing: 0.5px;
+        }
+        
+        @keyframes marquee-0 {
+            0%, 100% { transform: translateY(0) translateZ(0); }
+            50% { transform: translateY(-80px) translateZ(30px); }
+        }
+        
+        @keyframes marquee-1 {
+            0%, 100% { transform: translateY(0) translateZ(0); }
+            50% { transform: translateY(80px) translateZ(30px); }
+        }
+        
+        .3d-item:hover img {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">个人简历</div>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#experience">工作经历</a></li>
+                <li><a href="#education">教育背景</a></li>
+                <li><a href="#projects">项目经验</a></li>
+                <li><a href="#bento">个人优势</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 顶部个人简介区 -->
+    <section id="about" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" style="margin-right: 40px;">
+                    <h1>张三</h1>
+                    <h2>前端开发工程师</h2>
+                    <p>专注于构建现代化、响应式的Web应用，拥有5年前端开发经验</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>zhangsan@example.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>138-0013-8000</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>北京市朝阳区</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="interactive-hover-button">
+                            <span class="button-text">下载简历</span>
+                            <span class="button-icon"><i class="fas fa-download"></i></span>
+                        </button>
+                        <button class="interactive-hover-button secondary">
+                            <span class="button-text">联系我</span>
+                            <span class="button-icon"><i class="fas fa-envelope"></i></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image" style="position: relative; display: inline-block; margin-left: 40px;">
+                    <!-- 旋转技能图标 -->
+                    <div class="orbiting-skills" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; z-index: 1;">
+                        <!-- 轨道 -->
+                        <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; pointer-events: none;">
+                            <circle cx="300" cy="300" r="200" fill="none" stroke="rgba(0, 255, 255, 0.5)" stroke-width="2" />
+                            <circle cx="300" cy="300" r="280" fill="none" stroke="rgba(255, 0, 255, 0.5)" stroke-width="2" />
+                        </svg>
+                        
+                        <!-- 内圈技能图标 -->
+                        <div class="skill-icon orbit-1" style="animation-delay: 0s;">
+                            <i class="fab fa-react" style="color: #61dafb;"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-icon orbit-2" style="animation-delay: -4.17s;">
+                            <i class="fab fa-js" style="color: #f7df1e;"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-icon orbit-3" style="animation-delay: -8.33s;">
+                            <i class="fab fa-css3-alt" style="color: #264de4;"></i>
+                            <span>CSS</span>
+                        </div>
+                        <div class="skill-icon orbit-4" style="animation-delay: -12.5s;">
+                            <i class="fab fa-html5" style="color: #e34f26;"></i>
+                            <span>HTML</span>
+                        </div>
+                        <div class="skill-icon orbit-5" style="animation-delay: -16.67s;">
+                            <i class="fab fa-js-square" style="color: #3178c6;"></i>
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="skill-icon orbit-6" style="animation-delay: -20.83s;">
+                            <i class="fab fa-node" style="color: #339933;"></i>
+                            <span>Node.js</span>
+                        </div>
+                        
+                        <!-- 外圈技能图标 -->
+                        <div class="skill-icon outer orbit-1" style="animation-delay: 0s;">
+                            <i class="fab fa-github" style="color: #333;"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-icon outer orbit-2" style="animation-delay: -4.29s;">
+                            <i class="fab fa-docker" style="color: #2496ed;"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="skill-icon outer orbit-3" style="animation-delay: -8.57s;">
+                            <i class="fab fa-bootstrap" style="color: #563d7c;"></i>
+                            <span>Bootstrap</span>
+                        </div>
+                        <div class="skill-icon outer orbit-4" style="animation-delay: -12.86s;">
+                            <i class="fas fa-database" style="color: #4479A1;"></i>
+                            <span>SQL</span>
+                        </div>
+                        <div class="skill-icon outer orbit-5" style="animation-delay: -17.14s;">
+                            <i class="fab fa-aws" style="color: #FF9900;"></i>
+                            <span>AWS</span>
+                        </div>
+                        <div class="skill-icon outer orbit-6" style="animation-delay: -21.43s;">
+                            <i class="fas fa-mobile-alt" style="color: #34A853;"></i>
+                            <span>Mobile</span>
+                        </div>
+                        <div class="skill-icon outer orbit-7" style="animation-delay: -25.71s;">
+                            <i class="fab fa-vuejs" style="color: #4FC08D;"></i>
+                            <span>Vue</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 头像 -->
+                    <div class="avatar">
+                        <img src="public/小树.jpg" alt="个人头像">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能板块 -->
+    <section id="skills" class="skills-section">
+        <div class="section-bg"></div>
+        <div class="container">
+            <h2 class="section-title">技能</h2>
+            
+            <!-- 技能内容布局 -->
+            <div class="skills-content">
+                <!-- 左侧：技能云和熟练度 -->
+                <div class="skills-left">
+                    <!-- 技能云部分 -->
+                    <div class="skills-cloud-container">
+                        <div class="icon-cloud-container">
+                            <div id="icon-cloud"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 技术熟练度 -->
+                    <div class="skill-item proficiency">
+                        <div class="skill-header">
+                            <h3>技术熟练度</h3>
+                        </div>
+                        <div class="skill-bars">
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span>HTML5/CSS3</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span>JavaScript/TypeScript</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span>React</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span>Vue</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧：技能概览 -->
+                <div class="skills-right">
+                    <div class="skill-item overview">
+                        <div class="skill-header">
+                            <h3>技能概览</h3>
+                        </div>
+                        <div class="skills-grid" id="images-badge-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作经历区 -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">工作经历</h2>
+            <div class="timeline">
+                <div class="timeline-progress"></div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018年-2020年</div>
+                        <h3>初级前端开发工程师</h3>
+                        <h4>软件服务公司</h4>
+                        <p>参与项目的前端开发，学习并应用前端技术栈。</p>
+                        <ul>
+                            <li>使用<span class="highlight">HTML</span>、<span class="highlight">CSS</span>、<span class="highlight">JavaScript</span>开发网站</li>
+                            <li>学习并应用<span class="highlight">前端框架</span>和工具</li>
+                            <li>参与<span class="highlight">代码审查</span>和测试</li>
+                            <li>解决前端常见问题</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-expand-icon">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="timeline-details">
+                        <h4>详细职责</h4>
+                        <p>作为初级前端开发工程师，我参与了多个项目的前端开发工作，主要负责页面的构建和基础功能的实现。通过这些项目，我积累了丰富的前端开发经验，掌握了<span class="highlight">HTML</span>、<span class="highlight">CSS</span>、<span class="highlight">JavaScript</span>等基础技术，并开始学习和应用<span class="highlight">前端框架</span>和工具。</p>
+                        <p>我积极参与<span class="highlight">代码审查</span>和测试工作，不断提高自己的代码质量和技术水平。同时，我也学会了如何解决前端开发中常见的问题，为后续的职业发展奠定了坚实的基础。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020年-2022年</div>
+                        <h3>前端开发工程师</h3>
+                        <h4>互联网科技公司</h4>
+                        <p>参与公司多个项目的前端开发，负责页面构建和交互实现。</p>
+                        <ul>
+                            <li>使用<span class="highlight">Vue.js</span>开发<span class="highlight">企业级管理系统</span></li>
+                            <li>实现<span class="highlight">响应式布局</span>，适配各种设备</li>
+                            <li>优化<span class="highlight">用户界面</span>，提升<span class="highlight">用户体验</span></li>
+                            <li>解决<span class="highlight">前端性能</span>问题，提高页面加载速度</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-expand-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="timeline-details">
+                        <h4>详细职责</h4>
+                        <p>作为前端开发工程师，我参与了公司多个项目的前端开发工作，负责页面构建和交互实现。我使用<span class="highlight">Vue.js</span>开发了<span class="highlight">企业级管理系统</span>，实现了<span class="highlight">响应式布局</span>，适配各种设备。</p>
+                        <p>我注重<span class="highlight">用户界面</span>的优化，通过改进设计和交互，提升了<span class="highlight">用户体验</span>。同时，我也积极解决<span class="highlight">前端性能</span>问题，通过代码优化和资源管理，提高了页面加载速度，为用户提供了更加流畅的使用体验。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022年至今</div>
+                        <h3>高级前端开发工程师</h3>
+                        <h4>科技有限公司</h4>
+                        <p>负责公司核心产品的前端开发，参与技术选型和架构设计，带领团队完成多个重要项目。</p>
+                        <ul>
+                            <li>使用<span class="highlight">React</span> + <span class="highlight">TypeScript</span>构建现代化Web应用，提升用户体验</li>
+                            <li>优化<span class="highlight">前端性能</span>，页面加载速度提升40%</li>
+                            <li>制定<span class="highlight">前端开发规范</span>和最佳实践，提高团队开发效率</li>
+                            <li>与后端团队协作，实现<span class="highlight">前后端分离架构</span></li>
+                        </ul>
+                    </div>
+                    <div class="timeline-expand-icon">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="timeline-details">
+                        <h4>详细职责</h4>
+                        <p>作为高级前端开发工程师，我负责公司核心产品的前端开发，参与<span class="highlight">技术选型</span>和<span class="highlight">架构设计</span>。我使用<span class="highlight">React</span> + <span class="highlight">TypeScript</span>构建了现代化Web应用，通过<span class="highlight">组件化开发</span>和<span class="highlight">状态管理</span>，提升了开发效率和代码质量。</p>
+                        <p>我注重<span class="highlight">前端性能优化</span>，通过<span class="highlight">代码分割</span>、<span class="highlight">懒加载</span>、<span class="highlight">缓存策略</span>等技术，使页面加载速度提升了40%。同时，我也制定了<span class="highlight">前端开发规范</span>和最佳实践，提高了团队的开发效率和代码一致性。</p>
+                        <p>我与后端团队密切协作，实现了<span class="highlight">前后端分离架构</span>，通过<span class="highlight">API接口设计</span>和数据交互，确保了系统的稳定性和可扩展性。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景与证书荣誉区 -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">教育背景与证书荣誉</h2>
+            
+            <!-- 教育背景 -->
+            <div class="education-container" style="margin-bottom: var(--spacing-16);">
+                <div class="education-item">
+                    <div class="education-date"><span>2014年-2018年</span></div>
+                    <div class="education-content">
+                        <h3>计算机科学与技术</h3>
+                        <h4>北京大学</h4>
+                        <p>本科学历，主修计算机科学与技术，辅修软件工程。</p>
+                        <p>相关课程：数据结构、算法、操作系统、计算机网络、数据库原理、Web前端开发</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 证书荣誉跑马灯 -->
+            <div class="certificates-marquee">
+                <!-- 上排：向左滚动 -->
+                <div class="marquee-row marquee-row-left">
+                    <div class="marquee-content">
+                        <div class="certificate-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>前端开发工程师认证</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-award"></i>
+                            <span>优秀项目奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-medal"></i>
+                            <span>技术创新奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>最佳团队贡献奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-star"></i>
+                            <span>年度优秀员工</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>React专业认证</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-award"></i>
+                            <span>UI设计优秀奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-medal"></i>
+                            <span>性能优化专家</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>前端开发工程师认证</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-award"></i>
+                            <span>优秀项目奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-medal"></i>
+                            <span>技术创新奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>最佳团队贡献奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-star"></i>
+                            <span>年度优秀员工</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>React专业认证</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-award"></i>
+                            <span>UI设计优秀奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-medal"></i>
+                            <span>性能优化专家</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 下排：向右滚动 -->
+                <div class="marquee-row marquee-row-right">
+                    <div class="marquee-content">
+                        <div class="certificate-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>大学英语六级证书</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>计算机二级证书</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-award"></i>
+                            <span>一等奖学金</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-medal"></i>
+                            <span>二等奖学金</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>三好学生</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>优秀毕业生</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-microchip"></i>
+                            <span>校园科技创新大赛一等奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-code"></i>
+                            <span>程序设计竞赛三等奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>数学建模竞赛二等奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-comments"></i>
+                            <span>辩论赛最佳辩手</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>社会实践先进个人</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-heart"></i>
+                            <span>志愿者服务先进个人</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>大学英语六级证书</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>计算机二级证书</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-award"></i>
+                            <span>一等奖学金</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-medal"></i>
+                            <span>二等奖学金</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>三好学生</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>优秀毕业生</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-microchip"></i>
+                            <span>校园科技创新大赛一等奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-code"></i>
+                            <span>程序设计竞赛三等奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>数学建模竞赛二等奖</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-comments"></i>
+                            <span>辩论赛最佳辩手</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>社会实践先进个人</span>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-heart"></i>
+                            <span>志愿者服务先进个人</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目经验区 -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">项目经验</h2>
+            <div class="projects-container">
+                <div class="project-card-3d">
+                    <div class="card-3d-container">
+                        <div class="card-3d">
+                            <div class="card-3d-content">
+                                <div class="card-3d-header">
+                                    <div class="card-3d-icon">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <h3>企业管理系统</h3>
+                                </div>
+                                <div class="project-info">
+                                    <span class="project-role">前端负责人</span>
+                                    <span class="project-tech">React, TypeScript, Ant Design</span>
+                                </div>
+                                <p>为企业开发的内部管理系统，包含用户管理、权限控制、数据统计等功能。</p>
+                                <ul>
+                                    <li>使用React + TypeScript构建，保证代码质量</li>
+                                    <li>集成Ant Design组件库，提高开发效率</li>
+                                    <li>实现响应式设计，适配不同设备</li>
+                                    <li>优化性能，提高系统响应速度</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card-3d">
+                    <div class="card-3d-container">
+                        <div class="card-3d">
+                            <div class="card-3d-content">
+                                <div class="card-3d-header">
+                                    <div class="card-3d-icon">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <h3>电商网站</h3>
+                                </div>
+                                <div class="project-info">
+                                    <span class="project-role">前端开发</span>
+                                    <span class="project-tech">Vue, JavaScript, Element UI</span>
+                                </div>
+                                <p>为客户开发的电商网站，包含商品展示、购物车、订单管理等功能。</p>
+                                <ul>
+                                    <li>使用Vue.js开发，实现组件化设计</li>
+                                    <li>集成Element UI组件库，提升用户体验</li>
+                                    <li>实现商品搜索和筛选功能</li>
+                                    <li>优化页面加载速度，提升用户体验</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card-3d">
+                    <div class="card-3d-container">
+                        <div class="card-3d">
+                            <div class="card-3d-content">
+                                <div class="card-3d-header">
+                                    <div class="card-3d-icon">
+                                        <i class="fas fa-blog"></i>
+                                    </div>
+                                    <h3>个人博客系统</h3>
+                                </div>
+                                <div class="project-info">
+                                    <span class="project-role">独立开发者</span>
+                                    <span class="project-tech">HTML, CSS, JavaScript, Node.js</span>
+                                </div>
+                                <p>个人博客系统，包含文章发布、评论、分类等功能。</p>
+                                <ul>
+                                    <li>使用纯HTML、CSS、JavaScript开发前端</li>
+                                    <li>使用Node.js开发后端API</li>
+                                    <li>实现响应式设计，适配不同设备</li>
+                                    <li>优化数据库查询，提高系统性能</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D 项目展示区 -->
+    <section id="3d-projects" class="projects-3d">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: -2;">项目展示</h2>
+            <div style="text-align: center; margin-bottom: 0; position: relative; z-index: 10;">
+                <div id="project-detail-container"></div>
+            </div>
+            <div class="3d-marquee-container" style="perspective: 1000px; height: 1000px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+                <div class="3d-grid" style="transform: rotateX(30deg) rotateY(4deg) rotateZ(5deg); transform-style: preserve-3d; display: flex; gap: 80px; padding: 60px;">
+                    <!-- 第一列 -->
+                    <div class="3d-column">
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="大众点评网页" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">大众点评网页</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" alt="电商网站" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">电商网站</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop" alt="移动应用界面" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">移动应用界面</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative;">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=300&fit=crop" alt="社交媒体应用" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">社交媒体应用</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二列 -->
+                    <div class="3d-column">
+                        <div class="3d-item" style="animation: marquee-1 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=400&h=300&fit=crop" alt="贪吃蛇小游戏" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">贪吃蛇小游戏</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-1 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop" alt="企业官网" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">企业官网</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-1 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" alt="数据仪表盘" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">数据仪表盘</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-1 10s infinite alternate ease-in-out; position: relative;">
+                            <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400&h=300&fit=crop" alt="智能健康监测应用" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">智能健康监测应用</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三列 -->
+                    <div class="3d-column">
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=300&fit=crop" alt="视频制作软件" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">视频制作软件</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&h=300&fit=crop" alt="个人博客" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">个人博客</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative; margin-bottom: 60px;">
+                            <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=300&fit=crop" alt="在线教育平台" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">在线教育平台</div>
+                        </div>
+                        <div class="3d-item" style="animation: marquee-0 10s infinite alternate ease-in-out; position: relative;">
+                            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop" alt="音乐播放器" style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2); transition: all 0.3s ease; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <div style="position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 600; color: var(--color-text); text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">音乐播放器</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid 部分 -->
+    <section id="bento" class="bento">
+        <div class="container">
+            <h2 class="section-title">个人优势</h2>
+            <div class="bento-container">
+                <div class="bento-card large">
+                    <div class="card-grid"></div>
+                    <div class="bento-icon"><i class="fas fa-code"></i></div>
+                    <h3>技术能力</h3>
+                    <p>拥有丰富的前端开发经验，精通现代前端技术栈，能够快速学习新技术并应用到实际项目中。具备良好的代码风格和工程化意识，注重代码质量和性能优化。</p>
+                </div>
+                <div class="bento-card">
+                    <div class="card-grid"></div>
+                    <div class="bento-icon"><i class="fas fa-brain"></i></div>
+                    <h3>问题解决</h3>
+                    <p>善于分析和解决复杂问题，具备良好的逻辑思维能力和调试技巧，能够快速定位和修复前端问题。</p>
+                </div>
+                <div class="bento-card medium">
+                    <div class="card-grid"></div>
+                    <div class="bento-icon"><i class="fas fa-users"></i></div>
+                    <h3>团队协作</h3>
+                    <p>具备良好的团队协作能力，能够与产品、设计和后端团队有效沟通，共同完成项目目标。</p>
+                </div>
+                <div class="bento-card">
+                    <div class="card-grid"></div>
+                    <div class="bento-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>创新思维</h3>
+                    <p>具有创新思维，能够提出新的解决方案和优化建议，不断提升产品的用户体验。</p>
+                </div>
+                <div class="bento-card">
+                    <div class="card-grid"></div>
+                    <div class="bento-icon"><i class="fas fa-language"></i></div>
+                    <h3>语言能力</h3>
+                    <p>英语：CET-6，能够阅读和理解英文技术文档。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>张三</h3>
+                    <p>前端开发工程师</p>
+                    <p>zhangsan@example.com</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-weibo"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#" class="footer-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="#" class="footer-link"><i class="fab fa-weixin"></i> 微信</a>
+                    <a href="#" class="footer-link"><i class="fab fa-weibo"></i> 微博</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 个人简历. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dock 组件 -->
+
+
+    <script src="resume.js"></script>
+
+    <script type="text/babel">
+        // 导入 IconCloud 组件
+        const { IconCloud } = {
+            IconCloud: function IconCloud({ icons, images }) {
+                const canvasRef = React.useRef(null);
+                const [iconPositions, setIconPositions] = React.useState([]);
+                const [isDragging, setIsDragging] = React.useState(false);
+                const [lastMousePos, setLastMousePos] = React.useState({ x: 0, y: 0 });
+                const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+                const [targetRotation, setTargetRotation] = React.useState(null);
+                const animationFrameRef = React.useRef(0);
+                const rotationRef = React.useRef({ x: 0, y: 0 });
+                const iconCanvasesRef = React.useRef([]);
+                const imagesLoadedRef = React.useRef([]);
+
+                function easeOutCubic(t) {
+                    return 1 - Math.pow(1 - t, 3);
+                }
+
+                // Create icon canvases once when icons/images change
+                React.useEffect(() => {
+                    if (!icons && !images) return;
+
+                    const items = icons ?? images ?? [];
+                    imagesLoadedRef.current = new Array(items.length).fill(false);
+
+                    const newIconCanvases = items.map((item, index) => {
+                        const offscreen = document.createElement("canvas");
+                        offscreen.width = 40;
+                        offscreen.height = 40;
+                        const offCtx = offscreen.getContext("2d");
+
+                        if (offCtx) {
+                            if (images) {
+                                // Handle image URLs directly
+                                const img = new Image();
+                                img.crossOrigin = "anonymous";
+                                img.src = items[index];
+                                img.onload = () => {
+                                    offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
+
+                                    // Create circular clipping path
+                                    offCtx.beginPath();
+                                    offCtx.arc(20, 20, 20, 0, Math.PI * 2);
+                                    offCtx.closePath();
+                                    offCtx.clip();
+
+                                    // Draw the image
+                                    offCtx.drawImage(img, 0, 0, 40, 40);
+
+                                    imagesLoadedRef.current[index] = true;
+                                };
+                            } else {
+                                // Handle SVG icons
+                                offCtx.scale(0.4, 0.4);
+                                const svgString = ReactDOMServer.renderToString(item);
+                                const img = new Image();
+                                img.src = "data:image/svg+xml;base64," + btoa(svgString);
+                                img.onload = () => {
+                                    offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
+                                    offCtx.drawImage(img, 0, 0);
+                                    imagesLoadedRef.current[index] = true;
+                                };
+                            }
+                        }
+                        return offscreen;
+                    });
+
+                    iconCanvasesRef.current = newIconCanvases;
+                }, [icons, images]);
+
+                // Generate initial icon positions on a sphere
+                React.useEffect(() => {
+                    const items = icons ?? images ?? [];
+                    const newIcons = [];
+                    const numIcons = items.length || 20;
+
+                    // Fibonacci sphere parameters
+                    const offset = 2 / numIcons;
+                    const increment = Math.PI * (3 - Math.sqrt(5));
+
+                    for (let i = 0; i < numIcons; i++) {
+                        const y = i * offset - 1 + offset / 2;
+                        const r = Math.sqrt(1 - y * y);
+                        const phi = i * increment;
+
+                        const x = Math.cos(phi) * r;
+                        const z = Math.sin(phi) * r;
+
+                        newIcons.push({
+                            x: x * 100,
+                            y: y * 100,
+                            z: z * 100,
+                            scale: 1,
+                            opacity: 1,
+                            id: i,
+                        });
+                    }
+                    setIconPositions(newIcons);
+                }, [icons, images]);
+
+                // Handle mouse events
+                const handleMouseDown = (e) => {
+                    const rect = canvasRef.current?.getBoundingClientRect();
+                    if (!rect || !canvasRef.current) return;
+
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const ctx = canvasRef.current.getContext("2d");
+                    if (!ctx) return;
+
+                    iconPositions.forEach((icon) => {
+                        const cosX = Math.cos(rotationRef.current.x);
+                        const sinX = Math.sin(rotationRef.current.x);
+                        const cosY = Math.cos(rotationRef.current.y);
+                        const sinY = Math.sin(rotationRef.current.y);
+
+                        const rotatedX = icon.x * cosY - icon.z * sinY;
+                        const rotatedZ = icon.x * sinY + icon.z * cosY;
+                        const rotatedY = icon.y * cosX + rotatedZ * sinX;
+
+                        const screenX = canvasRef.current.width / 2 + rotatedX;
+                        const screenY = canvasRef.current.height / 2 + rotatedY;
+
+                        const scale = (rotatedZ + 200) / 300;
+                        const radius = 20 * scale;
+                        const dx = x - screenX;
+                        const dy = y - screenY;
+
+                        if (dx * dx + dy * dy < radius * radius) {
+                            const targetX = -Math.atan2(icon.y, Math.sqrt(icon.x * icon.x + icon.z * icon.z));
+                            const targetY = Math.atan2(icon.x, icon.z);
+
+                            const currentX = rotationRef.current.x;
+                            const currentY = rotationRef.current.y;
+                            const distance = Math.sqrt(Math.pow(targetX - currentX, 2) + Math.pow(targetY - currentY, 2));
+
+                            const duration = Math.min(2000, Math.max(800, distance * 1000));
+
+                            setTargetRotation({
+                                x: targetX,
+                                y: targetY,
+                                startX: currentX,
+                                startY: currentY,
+                                distance,
+                                startTime: performance.now(),
+                                duration,
+                            });
+                            return;
+                        }
+                    });
+
+                    setIsDragging(true);
+                    setLastMousePos({ x: e.clientX, y: e.clientY });
+                };
+
+                const handleMouseMove = (e) => {
+                    const rect = canvasRef.current?.getBoundingClientRect();
+                    if (rect) {
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        setMousePos({ x, y });
+                    }
+
+                    if (isDragging) {
+                        const deltaX = e.clientX - lastMousePos.x;
+                        const deltaY = e.clientY - lastMousePos.y;
+
+                        rotationRef.current = {
+                            x: rotationRef.current.x + deltaY * 0.002,
+                            y: rotationRef.current.y + deltaX * 0.002,
+                        };
+
+                        setLastMousePos({ x: e.clientX, y: e.clientY });
+                    }
+                };
+
+                const handleMouseUp = () => {
+                    setIsDragging(false);
+                };
+
+                // Animation and rendering
+                React.useEffect(() => {
+                    const canvas = canvasRef.current;
+                    const ctx = canvas?.getContext("2d");
+                    if (canvas && ctx) {
+                        const animate = () => {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                            const centerX = canvas.width / 2;
+                            const centerY = canvas.height / 2;
+                            const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+                            const dx = mousePos.x - centerX;
+                            const dy = mousePos.y - centerY;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            const speed = 0.003 + (distance / maxDistance) * 0.01;
+
+                            if (targetRotation) {
+                                const elapsed = performance.now() - targetRotation.startTime;
+                                const progress = Math.min(1, elapsed / targetRotation.duration);
+                                const easedProgress = easeOutCubic(progress);
+
+                                rotationRef.current = {
+                                    x:
+                                        targetRotation.startX +
+                                        (targetRotation.x - targetRotation.startX) * easedProgress,
+                                    y:
+                                        targetRotation.startY +
+                                        (targetRotation.y - targetRotation.startY) * easedProgress,
+                                };
+
+                                if (progress >= 1) {
+                                    setTargetRotation(null);
+                                }
+                            } else if (!isDragging) {
+                                rotationRef.current = {
+                                    x: rotationRef.current.x + (dy / canvas.height) * speed,
+                                    y: rotationRef.current.y + (dx / canvas.width) * speed,
+                                };
+                            }
+
+                            iconPositions.forEach((icon, index) => {
+                                const cosX = Math.cos(rotationRef.current.x);
+                                const sinX = Math.sin(rotationRef.current.x);
+                                const cosY = Math.cos(rotationRef.current.y);
+                                const sinY = Math.sin(rotationRef.current.y);
+
+                                const rotatedX = icon.x * cosY - icon.z * sinY;
+                                const rotatedZ = icon.x * sinY + icon.z * cosY;
+                                const rotatedY = icon.y * cosX + rotatedZ * sinX;
+
+                                const scale = (rotatedZ + 200) / 300;
+                                const opacity = Math.max(0.2, Math.min(1, (rotatedZ + 150) / 200));
+
+                                ctx.save();
+                                ctx.translate(canvas.width / 2 + rotatedX, canvas.height / 2 + rotatedY);
+                                ctx.scale(scale, scale);
+                                ctx.globalAlpha = opacity;
+
+                                if (icons || images) {
+                                    // Only try to render icons/images if they exist
+                                    if (
+                                        iconCanvasesRef.current[index] &&
+                                        imagesLoadedRef.current[index]
+                                    ) {
+                                        ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 40, 40);
+                                    }
+                                } else {
+                                    // Show numbered circles if no icons/images are provided
+                                    ctx.beginPath();
+                                    ctx.arc(0, 0, 20, 0, Math.PI * 2);
+                                    ctx.fillStyle = "#4444ff";
+                                    ctx.fill();
+                                    ctx.fillStyle = "white";
+                                    ctx.textAlign = "center";
+                                    ctx.textBaseline = "middle";
+                                    ctx.font = "16px Arial";
+                                    ctx.fillText(`${icon.id + 1}`, 0, 0);
+                                }
+
+                                ctx.restore();
+                            });
+                            animationFrameRef.current = requestAnimationFrame(animate);
+                        };
+
+                        animate();
+                    }
+
+                    return () => {
+                        if (animationFrameRef.current) {
+                            cancelAnimationFrame(animationFrameRef.current);
+                        }
+                    };
+                }, [icons, images, iconPositions, isDragging, mousePos, targetRotation]);
+
+                return (
+                    <canvas
+                        ref={canvasRef}
+                        width={400}
+                        height={400}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseUp}
+                        className="rounded-lg bg-white shadow-lg"
+                        aria-label="Interactive 3D Icon Cloud"
+                        role="img"
+                    />
+                );
+            }
+        };
+
+        // 定义技能图标（使用图片 URL 格式）
+        const skillImages = [
+            "https://api.iconify.design/devicon:html5.svg?color=%23e34f26",
+            "https://api.iconify.design/devicon:css3.svg?color=%231572b6",
+            "https://api.iconify.design/devicon:javascript.svg?color=%23f7df1e",
+            "https://api.iconify.design/devicon:react.svg?color=%2361dafb",
+            "https://api.iconify.design/devicon:vuejs.svg?color=%234fc08d",
+            "https://api.iconify.design/devicon:nodejs.svg?color=%23339933",
+            "https://api.iconify.design/devicon:git.svg?color=%23f05032",
+            "https://api.iconify.design/devicon:vscode.svg?color=%23007acc",
+            "https://api.iconify.design/devicon:figma.svg?color=%23f24e1e",
+            "https://api.iconify.design/devicon:photoshop.svg?color=%2331a8ff",
+            "https://api.iconify.design/devicon:github.svg?color=%23181717",
+            "https://api.iconify.design/devicon:webpack.svg?color=%238dd6f9",
+            "https://api.iconify.design/devicon:typescript.svg?color=%233178c6",
+            "https://api.iconify.design/devicon:bootstrap.svg?color=%23563d7c",
+            "https://api.iconify.design/devicon:docker.svg?color=%232496ed"
+        ];
+
+        // 渲染 IconCloud 组件
+        ReactDOM.render(
+            <IconCloud images={skillImages} />,
+            document.getElementById('icon-cloud')
+        );
+
+        // ImagesBadge 组件实现
+        function ImagesBadge({
+            text,
+            images,
+            className,
+            href,
+            target
+        }) {
+            const [isHovered, setIsHovered] = React.useState(false);
+
+            // Limit to max 3 images
+            const displayImages = images.slice(0, 3);
+
+            const Component = href ? "a" : "div";
+
+            // 计算图片位置
+            const getImageStyle = (index, totalImages) => {
+                // Hover positions - fan out
+                const hoverTranslateY = -35;
+                const hoverSpread = 20;
+                const hoverRotation = 15;
+                
+                const baseRotation =
+                    totalImages === 1
+                        ? 0
+                        : totalImages === 2
+                            ? (index - 0.5) * hoverRotation
+                            : (index - 1) * hoverRotation;
+
+                const hoverY = hoverTranslateY - (totalImages - 1 - index) * 3;
+                const hoverX =
+                    totalImages === 1
+                        ? 0
+                        : totalImages === 2
+                            ? (index - 0.5) * hoverSpread
+                            : (index - 1) * hoverSpread;
+
+                const teaseY = -4 - (totalImages - 1 - index) * 1;
+                const teaseRotation =
+                    totalImages === 1
+                        ? 0
+                        : totalImages === 2
+                            ? (index - 0.5) * 3
+                            : (index - 1) * 3;
+
+                if (isHovered) {
+                    return {
+                        transform: `translateX(calc(-50% + ${hoverX}px)) translateY(${hoverY}px) rotate(${baseRotation}deg)`,
+                        width: '48px',
+                        height: '32px'
+                    };
+                } else {
+                    return {
+                        transform: `translateX(-50%) translateY(${teaseY}px) rotate(${teaseRotation}deg)`,
+                        width: '20px',
+                        height: '14px'
+                    };
+                }
+            };
+
+            return (
+                <Component
+                    href={href}
+                    target={target}
+                    rel={target === "_blank" ? "noopener noreferrer" : undefined}
+                    className="images-badge-container"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}>
+                    {/* Folder Container */}
+                    <div className="folder-container">
+                        <div className="folder-inner">
+                            {/* Folder Back */}
+                            <div className="folder-back">
+                                {/* Folder Tab */}
+                                <div className="folder-tab"></div>
+                            </div>
+
+                            {/* Images that pop out */}
+                            {displayImages.map((image, index) => {
+                                const totalImages = displayImages.length;
+                                const style = getImageStyle(index, totalImages);
+                                return (
+                                    <div
+                                        key={index}
+                                        className="badge-image"
+                                        style={{
+                                            ...style,
+                                            zIndex: 30 + index,
+                                            transitionDelay: `${index * 30}ms`
+                                        }}>
+                                        <img
+                                            src={image}
+                                            alt={`Preview ${index + 1}`} />
+                                    </div>
+                                );
+                            })}
+
+                            {/* Folder Front (flattens on hover) */}
+                            <div 
+                                className="folder-front"
+                                style={{
+                                    transform: isHovered ? 'perspective(1000px) rotateX(-45deg) scaleY(0.8)' : 'perspective(1000px) rotateX(-25deg) scaleY(1)',
+                                transformStyle: 'preserve-3d'
+                            }}></div>
+                        </div>
+                    </div>
+                    {/* Text */}
+                    <span className="badge-text">{text}</span>
+                </Component>
+            );
+        }
+
+        // 技能概览数据
+        const skillCategories = [
+            {
+                text: "前端技术",
+                images: [
+                    "https://api.iconify.design/devicon:html5.svg?color=%23e34f26",
+                    "https://api.iconify.design/devicon:css3.svg?color=%231572b6",
+                    "https://api.iconify.design/devicon:javascript.svg?color=%23f7df1e"
+                ],
+                tags: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Vue"]
+            },
+            {
+                text: "后端技术",
+                images: [
+                    "https://api.iconify.design/devicon:nodejs.svg?color=%23339933",
+                    "https://api.iconify.design/devicon:mongodb.svg?color=%2347a248"
+                ],
+                tags: ["Node.js", "Express", "MongoDB", "REST API"]
+            },
+            {
+                text: "工具与框架",
+                images: [
+                    "https://api.iconify.design/devicon:git.svg?color=%23f05032",
+                    "https://api.iconify.design/devicon:vscode.svg?color=%23007acc",
+                    "https://api.iconify.design/devicon:webpack.svg?color=%238dd6f9"
+                ],
+                tags: ["Git", "VS Code", "Webpack", "Bootstrap", "Tailwind CSS"]
+            },
+            {
+                text: "设计工具",
+                images: [
+                    "https://api.iconify.design/devicon:figma.svg?color=%23f24e1e",
+                    "https://api.iconify.design/devicon:photoshop.svg?color=%2331a8ff"
+                ],
+                tags: ["Figma", "Photoshop", "Adobe XD"]
+            }
+        ];
+
+        // SkillsOverview 组件
+        function SkillsOverview() {
+            return (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
+                    {skillCategories.map((category, index) => (
+                        <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div className="skill-category" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                <ImagesBadge text={category.text} images={category.images} />
+                                <div className="skill-tags" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                    {category.tags.map((tag, tagIndex) => (
+                                        <span 
+                                            key={tagIndex}
+                                            className="skill-tag"
+                                            style={{
+                                                display: 'inline-block',
+                                                padding: '0.25rem 0.75rem',
+                                                backgroundColor: '#e5e7eb',
+                                                borderRadius: '9999px',
+                                                fontSize: '0.875rem',
+                                                color: '#4b5563'
+                                            }}>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // 渲染技能概览组件
+        ReactDOM.render(
+            <SkillsOverview />,
+            document.getElementById('images-badge-container')
+        );
+
+        // 3D 跑马灯组件实现
+        function ThreeDMarquee({ images, className }) {
+            return (
+                <div className="mx-auto block h-[400px] overflow-hidden rounded-2xl max-w-4xl">
+                    <div className="flex size-full items-center justify-center">
+                        <div 
+                            style={{ 
+                                transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
+                                transformStyle: "preserve-3d"
+                            }}
+                            className="grid grid-cols-2 md:grid-cols-4 gap-4 p-8">
+                            {images.map((image, index) => (
+                                <div 
+                                    key={index}
+                                    style={{
+                                        animation: `marquee-${index % 2} ${8 + index}s infinite alternate ease-in-out`,
+                                        transformStyle: "preserve-3d"
+                                    }}
+                                    className="relative">
+                                    <img
+                                        src={image.src}
+                                        alt={image.alt}
+                                        className="w-40 h-30 object-cover rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                                        style={{ maxWidth: '100%' }} />
+                                    <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                        {image.alt}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // 项目数据
+        const projectImages = [
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Dianping%20website%20homepage%20with%20restaurant%20listings%2C%20food%20reviews%2C%20and%20ratings%2C%20professional%20web%20design&image_size=landscape_16_9",
+                alt: "大众点评网页"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Snake%20game%20interface%20with%20classic%20retro%20design%2C%20snake%20moving%20on%20grid%2C%20score%20display&image_size=landscape_16_9",
+                alt: "贪吃蛇小游戏"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Video%20editing%20software%20interface%20with%20timeline%2C%20preview%20window%2C%20and%20editing%20tools%2C%20professional%20design&image_size=landscape_16_9",
+                alt: "视频制作软件"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Corporate%20website%20with%20modern%20design%2C%20hero%20section%2C%20services%20and%20contact%20form&image_size=landscape_16_9",
+                alt: "企业官网"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=E-commerce%20website%20with%20product%20listings%2C%20shopping%20cart%2C%20and%20checkout%20process&image_size=landscape_16_9",
+                alt: "电商网站"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Personal%20blog%20website%20with%20articles%2C%20categories%2C%20and%20comment%20section&image_size=landscape_16_9",
+                alt: "个人博客"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Mobile%20app%20interface%20design%20with%20modern%20UI%2C%20navigation%20menu%2C%20and%20content%20sections&image_size=landscape_16_9",
+                alt: "移动应用界面"
+            },
+            {
+                src: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Data%20dashboard%20with%20charts%2C%20graphs%2C%20and%20analytics%20metrics%2C%20professional%20business%20design&image_size=landscape_16_9",
+                alt: "数据仪表盘"
+            }
+        ];
+
+        // 项目详情数据
+        const projectDetails = [
+            {
+                title: "大众点评网页",
+                description: "基于HTML、CSS和JavaScript开发的仿大众点评网站，包含餐厅列表、评论和评分功能。",
+                features: [
+                    "餐厅列表展示",
+                    "用户评论系统",
+                    "评分功能",
+                    "搜索和筛选"
+                ],
+                technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop"
+            },
+            {
+                title: "电商网站",
+                description: "电商平台的前端实现，包含商品列表、购物车和结账流程。",
+                features: [
+                    "商品列表展示",
+                    "购物车功能",
+                    "结账流程",
+                    "用户账户"
+                ],
+                technologies: ["React", "Redux", "Node.js", "MongoDB"],
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop"
+            },
+            {
+                title: "移动应用界面",
+                description: "移动应用界面设计，包含导航菜单、内容区块和交互元素。",
+                features: [
+                    "响应式布局",
+                    "导航菜单",
+                    "内容区块",
+                    "交互元素"
+                ],
+                technologies: ["Figma", "Adobe XD", "Sketch", "InVision"],
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop"
+            },
+            {
+                title: "社交媒体应用",
+                description: "社交媒体应用的前端实现，包含用户动态、消息和个人资料功能。",
+                features: [
+                    "用户动态",
+                    "消息系统",
+                    "个人资料",
+                    "社交互动"
+                ],
+                technologies: ["React", "Socket.io", "Firebase", "Material UI"],
+                image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=300&fit=crop"
+            },
+            {
+                title: "贪吃蛇小游戏",
+                description: "经典贪吃蛇游戏的实现，包含游戏逻辑、分数计算和游戏控制功能。",
+                features: [
+                    "游戏逻辑实现",
+                    "分数计算",
+                    "游戏控制",
+                    "游戏结束判断"
+                ],
+                technologies: ["HTML5", "CSS3", "JavaScript", "Canvas API"],
+                image: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=400&h=300&fit=crop"
+            },
+            {
+                title: "企业官网",
+                description: "企业官网的前端实现，包含首页、产品、关于我们和联系我们等页面。",
+                features: [
+                    "响应式设计",
+                    "产品展示",
+                    "公司介绍",
+                    "联系表单"
+                ],
+                technologies: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
+                image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop"
+            },
+            {
+                title: "数据仪表盘",
+                description: "数据仪表盘的前端实现，包含图表、图形和分析指标。",
+                features: [
+                    "数据可视化",
+                    "图表展示",
+                    "分析指标",
+                    "实时数据"
+                ],
+                technologies: ["React", "D3.js", "Chart.js", "Redux"],
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
+            },
+            {
+                title: "智能健康监测应用",
+                description: "智能健康监测应用，包含步数、心率等健康数据的监测和分析。",
+                features: [
+                    "健康数据监测",
+                    "数据分析",
+                    "用户界面",
+                    "数据可视化"
+                ],
+                technologies: ["React Native", "Firebase", "Chart.js"],
+                image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400&h=300&fit=crop"
+            },
+            {
+                title: "视频制作软件",
+                description: "视频编辑软件界面设计，包含时间线、预览窗口和编辑工具等功能。",
+                features: [
+                    "时间线编辑",
+                    "视频预览",
+                    "编辑工具",
+                    "导出功能"
+                ],
+                technologies: ["React", "TypeScript", "CSS-in-JS"],
+                image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=300&fit=crop"
+            },
+            {
+                title: "个人博客",
+                description: "个人博客网站的前端实现，包含文章列表、分类和评论功能。",
+                features: [
+                    "文章列表展示",
+                    "分类和标签",
+                    "评论系统",
+                    "响应式设计"
+                ],
+                technologies: ["React", "Next.js", "Markdown", "Tailwind CSS"],
+                image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&h=300&fit=crop"
+            },
+            {
+                title: "在线教育平台",
+                description: "在线教育平台的前端实现，包含课程列表、学习进度和考试功能。",
+                features: [
+                    "课程列表",
+                    "学习进度",
+                    "考试系统",
+                    "用户管理"
+                ],
+                technologies: ["React", "Node.js", "MongoDB", "Express"],
+                image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=300&fit=crop"
+            },
+            {
+                title: "音乐播放器",
+                description: "音乐播放器应用的前端实现，包含播放控制、歌单管理和音效调整功能。",
+                features: [
+                    "播放控制",
+                    "歌单管理",
+                    "音效调整",
+                    "歌词显示"
+                ],
+                technologies: ["React", "Redux", "Web Audio API", "Material UI"],
+                image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop"
+            }
+        ];
+
+        // 项目详情模态框组件
+        function ProjectDetailsModal() {
+            const [isOpen, setIsOpen] = React.useState(false);
+            const [currentProject, setCurrentProject] = React.useState(0);
+            
+            const nextProject = () => {
+                setCurrentProject((prev) => (prev + 1) % projectDetails.length);
+            };
+            
+            const prevProject = () => {
+                setCurrentProject((prev) => (prev - 1 + projectDetails.length) % projectDetails.length);
+            };
+            
+            return (
+                <div>
+                    <button 
+                        onClick={() => setIsOpen(true)}
+                        id="project-detail-btn" 
+                        className="interactive-hover-button"
+                    >
+                        <span className="button-text">查看项目详情</span>
+                        <span className="button-icon">
+                            <i className="fas fa-external-link-alt"></i>
+                        </span>
+                    </button>
+                    
+                    {isOpen && (
+                        <div style={{ 
+                            position: 'fixed', 
+                            top: 0, 
+                            left: 0, 
+                            right: 0, 
+                            bottom: 0, 
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center', 
+                            zIndex: 1000,
+                            backdropFilter: 'blur(10px)'
+                        }}>
+                            <div style={{ 
+                                backgroundColor: 'rgba(45, 55, 72, 0.95)', 
+                                borderRadius: '1rem', 
+                                padding: '2rem', 
+                                maxWidth: '600px', 
+                                maxHeight: '80vh', 
+                                overflow: 'auto',
+                                boxShadow: '0 20px 25px -5px rgba(0, 255, 255, 0.2), 0 10px 10px -5px rgba(0, 255, 255, 0.1)',
+                                border: '1px solid rgba(0, 255, 255, 0.3)'
+                            }}>
+                                <div style={{ 
+                                    display: 'flex', 
+                                    justifyContent: 'space-between', 
+                                    alignItems: 'center', 
+                                    marginBottom: '1.5rem'
+                                }}>
+                                    <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--color-primary)' }}>项目详情</h3>
+                                    <button 
+                                        onClick={() => setIsOpen(false)}
+                                        style={{ 
+                                            background: 'none', 
+                                            border: 'none', 
+                                            fontSize: '1.5rem', 
+                                            cursor: 'pointer',
+                                            color: 'var(--color-primary)'
+                                        }}
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                                
+                                <div style={{ marginBottom: '2rem' }}>
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <img 
+                                            src={projectDetails[currentProject].image} 
+                                            alt={projectDetails[currentProject].title} 
+                                            style={{ 
+                                                width: '100%', 
+                                                height: '200px', 
+                                                objectFit: 'cover', 
+                                                borderRadius: '0.5rem',
+                                                border: '1px solid rgba(0, 255, 255, 0.3)',
+                                                boxShadow: '0 4px 8px rgba(0, 255, 255, 0.2)'
+                                            }}
+                                        />
+                                    </div>
+                                    
+                                    <h4 style={{ 
+                                        fontSize: '1.25rem', 
+                                        fontWeight: '600', 
+                                        marginBottom: '1rem', 
+                                        color: 'var(--color-primary)'
+                                    }}>
+                                        {projectDetails[currentProject].title}
+                                    </h4>
+                                    
+                                    <p style={{ 
+                                        marginBottom: '1.5rem', 
+                                        color: 'var(--color-text-secondary)'
+                                    }}>
+                                        {projectDetails[currentProject].description}
+                                    </p>
+                                    
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <h5 style={{ 
+                                            fontSize: '1rem', 
+                                            fontWeight: '600', 
+                                            marginBottom: '0.5rem', 
+                                            color: 'var(--color-secondary)'
+                                        }}>
+                                            功能特点
+                                        </h5>
+                                        <ul style={{ 
+                                            listStyle: 'none', 
+                                            padding: 0, 
+                                            color: 'var(--color-text-secondary)'
+                                        }}>
+                                            {projectDetails[currentProject].features.map((feature, index) => (
+                                                <li key={index} style={{ 
+                                                    marginBottom: '0.25rem',
+                                                    display: 'flex',
+                                                    alignItems: 'center'
+                                                }}>
+                                                    <span style={{ 
+                                                        marginRight: '0.5rem',
+                                                        color: 'var(--color-primary)'
+                                                    }}>•</span>
+                                                    {feature}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    
+                                    <div style={{ marginBottom: '2rem' }}>
+                                        <h5 style={{ 
+                                            fontSize: '1rem', 
+                                            fontWeight: '600', 
+                                            marginBottom: '0.5rem', 
+                                            color: 'var(--color-secondary)'
+                                        }}>
+                                            技术栈
+                                        </h5>
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            flexWrap: 'wrap', 
+                                            gap: '0.5rem'
+                                        }}>
+                                            {projectDetails[currentProject].technologies.map((tech, index) => (
+                                                <span key={index} style={{ 
+                                                    padding: '0.25rem 0.75rem',
+                                                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                                                    border: '1px solid rgba(0, 255, 255, 0.3)',
+                                                    borderRadius: '9999px',
+                                                    fontSize: '0.875rem',
+                                                    color: 'var(--color-primary)'
+                                                }}>
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ 
+                                    display: 'flex', 
+                                    justifyContent: 'space-between', 
+                                    alignItems: 'center',
+                                    marginBottom: '1rem'
+                                }}>
+                                    <button 
+                                        onClick={prevProject}
+                                        style={{ 
+                                            padding: '0.5rem 1rem', 
+                                            backgroundColor: 'rgba(0, 255, 255, 0.1)', 
+                                            color: 'var(--color-primary)', 
+                                            borderRadius: '0.5rem', 
+                                            border: '1px solid rgba(0, 255, 255, 0.3)', 
+                                            cursor: 'pointer',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                    >
+                                        上一个
+                                    </button>
+                                    
+                                    <span style={{ 
+                                        color: 'var(--color-text-secondary)',
+                                        fontSize: '0.875rem'
+                                    }}>
+                                        {currentProject + 1} / {projectDetails.length}
+                                    </span>
+                                    
+                                    <button 
+                                        onClick={nextProject}
+                                        style={{ 
+                                            padding: '0.5rem 1rem', 
+                                            backgroundColor: 'rgba(0, 255, 255, 0.1)', 
+                                            color: 'var(--color-primary)', 
+                                            borderRadius: '0.5rem', 
+                                            border: '1px solid rgba(0, 255, 255, 0.3)', 
+                                            cursor: 'pointer',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                    >
+                                        下一个
+                                    </button>
+                                </div>
+                                
+                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <button 
+                                        onClick={() => setIsOpen(false)}
+                                        style={{ 
+                                            padding: '0.5rem 1.5rem', 
+                                            backgroundColor: 'var(--color-primary)', 
+                                            color: 'white', 
+                                            borderRadius: '0.5rem', 
+                                            border: 'none', 
+                                            cursor: 'pointer',
+                                            boxShadow: '0 0 10px rgba(0, 255, 255, 0.3)',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                    >
+                                        关闭
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // 渲染项目详情模态框
+        ReactDOM.render(
+            <ProjectDetailsModal />,
+            document.getElementById('project-detail-container')
+        );
+
+    </script>
+    
+    <script>
+        // 工作经历时间线滚动变亮效果
+        const timelineSection = document.getElementById('experience');
+        const timelineProgress = document.querySelector('.timeline-progress');
+        
+        function updateTimelineProgress() {
+            if (!timelineSection || !timelineProgress) return;
+            
+            const rect = timelineSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const sectionTop = rect.top;
+            const sectionHeight = rect.height;
+            
+            // 计算滚动进度
+            let progress = 0;
+            if (sectionTop < windowHeight * 0.8) {
+                progress = Math.min(1, (windowHeight * 0.8 - sectionTop) / (sectionHeight + windowHeight * 0.8));
+            }
+            
+            // 更新进度条
+            timelineProgress.style.transform = `scaleY(${progress})`;
+        }
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', updateTimelineProgress);
+        // 初始调用一次
+        updateTimelineProgress();
+    </script>
+</body>
+</html>
