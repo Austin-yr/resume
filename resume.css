@@ -429,6 +429,7 @@ html:not(.dark) .navbar.scrolled {
   /* 工作经历时间线 */
   .timeline::after {
     left: 30px;
+    margin-left: 0;
   }
   
   .timeline-progress {
@@ -455,6 +456,9 @@ html:not(.dark) .navbar.scrolled {
     height: 400px !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
+    display: block !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
   }
   
   .3d-grid {
@@ -462,6 +466,7 @@ html:not(.dark) .navbar.scrolled {
     gap: 40px !important;
     padding: 30px !important;
     min-width: max-content !important;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;
   }
   
   .3d-column {
@@ -482,6 +487,16 @@ html:not(.dark) .navbar.scrolled {
   .3d-item div {
     font-size: 12px !important;
     bottom: -20px !important;
+  }
+  
+  /* 隐藏滚动条但保留滚动功能 */
+  .3d-marquee-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .3d-marquee-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
   /* 项目卡片 */
