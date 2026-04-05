@@ -143,11 +143,77 @@ html.dark {
   --color-border-dark: #1E293B;
 }
 
-/* 全局样式 */
+/* 基础样式重置 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* 缩放优化 */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+/* 确保图片按比例缩放 */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 确保视频按比例缩放 */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 确保表格在缩放时不会溢出 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  word-wrap: break-word;
+}
+
+/* 确保代码块在缩放时不会溢出 */
+pre, code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* 确保按钮和链接在缩放时仍然可点击 */
+button, a {
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+/* 确保表单元素在缩放时正常显示 */
+input, textarea, select {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 确保卡片和容器在缩放时不会溢出 */
+.card, .container, .project-card, .bento-card, .education-card {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* 优化触摸事件 */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 允许文本选择 */
+p, h1, h2, h3, h4, h5, h6, span, div {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 body {
