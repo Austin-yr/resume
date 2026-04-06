@@ -190,6 +190,125 @@ body::before {
   pointer-events: none;
 }
 
+/* 页面两侧装饰元素 */
+.page-decoration {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.page-decoration-left {
+  left: 0;
+  background: linear-gradient(90deg, 
+    rgba(0, 255, 255, 0.1) 0%, 
+    rgba(0, 255, 255, 0.05) 50%, 
+    transparent 100%);
+}
+
+.page-decoration-right {
+  right: 0;
+  background: linear-gradient(-90deg, 
+    rgba(255, 0, 255, 0.1) 0%, 
+    rgba(255, 0, 255, 0.05) 50%, 
+    transparent 100%);
+}
+
+/* 角落装饰元素 */
+.corner-decoration {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.corner-top-left {
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle at 0% 0%, 
+    var(--color-primary) 0%, 
+    transparent 70%);
+}
+
+.corner-top-right {
+  top: 0;
+  right: 0;
+  background: radial-gradient(circle at 100% 0%, 
+    var(--color-secondary) 0%, 
+    transparent 70%);
+}
+
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 0% 100%, 
+    var(--color-secondary) 0%, 
+    transparent 70%);
+}
+
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(circle at 100% 100%, 
+    var(--color-primary) 0%, 
+    transparent 70%);
+}
+
+/* 浮动装饰元素 */
+.floating-decoration {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+  animation: float 10s ease-in-out infinite;
+}
+
+.floating-decoration-1 {
+  top: 20%;
+  left: 15%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, 
+    rgba(0, 255, 255, 0.1) 0%, 
+    transparent 70%);
+  animation-delay: 0s;
+}
+
+.floating-decoration-2 {
+  top: 60%;
+  right: 15%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, 
+    rgba(255, 0, 255, 0.1) 0%, 
+    transparent 70%);
+  animation-delay: 2s;
+}
+
+.floating-decoration-3 {
+  top: 80%;
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 0, 0.1) 0%, 
+    transparent 70%);
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
 body::after {
   content: '';
   position: fixed;
@@ -581,6 +700,31 @@ html:not(.dark) .navbar.scrolled {
   .avatar {
     width: 120px;
     height: 120px;
+  }
+  
+  /* 装饰元素响应式 */
+  .page-decoration {
+    width: 50px;
+  }
+  
+  .corner-decoration {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .floating-decoration-1 {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .floating-decoration-2 {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .floating-decoration-3 {
+    width: 40px;
+    height: 40px;
   }
   
   /* 工作经历时间线 */

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.5, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人简历</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,168 +21,6 @@
         function cn(...classes) {
             return classes.filter(Boolean).join(' ');
         }
-        
-        // 缩放功能优化
-        (function() {
-            let currentScale = 1;
-            let startDistance = 0;
-            let startScale = 1;
-            let isPinching = false;
-            let lastTap = 0;
-            const minScale = 0.5;
-            const maxScale = 3.0;
-            
-            // 检测触摸设备
-            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            
-            if (isTouchDevice) {
-                // 双指缩放
-                document.addEventListener('touchstart', function(e) {
-                    if (e.touches.length === 2) {
-                        isPinching = true;
-                        startDistance = getDistance(e.touches[0], e.touches[1]);
-                        startScale = currentScale;
-                    } else if (e.touches.length === 1) {
-                        // 双击缩放
-                        const now = new Date().getTime();
-                        const doubleTapDelay = 300;
-                        
-                        if (now - lastTap < doubleTapDelay) {
-                            // 双击
-                            if (currentScale === 1) {
-                                // 放大到1.5倍
-                                scaleTo(1.5);
-                            } else {
-                                // 缩回到原始大小
-                                scaleTo(1);
-                            }
-                        }
-                        
-                        lastTap = now;
-                    }
-                });
-                
-                document.addEventListener('touchmove', function(e) {
-                    if (isPinching && e.touches.length === 2) {
-                        e.preventDefault();
-                        const currentDistance = getDistance(e.touches[0], e.touches[1]);
-                        const scaleFactor = currentDistance / startDistance;
-                        const newScale = startScale * scaleFactor;
-                        
-                        // 限制缩放范围
-                        const clampedScale = Math.max(minScale, Math.min(maxScale, newScale));
-                        currentScale = clampedScale;
-                        
-                        // 应用缩放
-                        applyScale(clampedScale);
-                    }
-                });
-                
-                document.addEventListener('touchend', function() {
-                    isPinching = false;
-                });
-            }
-            
-            // 计算两点之间的距离
-            function getDistance(touch1, touch2) {
-                const dx = touch2.clientX - touch1.clientX;
-                const dy = touch2.clientY - touch1.clientY;
-                return Math.sqrt(dx * dx + dy * dy);
-            }
-            
-            // 应用缩放
-            function applyScale(scale) {
-                document.documentElement.style.transform = `scale(${scale})`;
-                document.documentElement.style.transformOrigin = 'center center';
-                document.documentElement.style.transition = 'transform 0.1s ease-out';
-                
-                // 提供缩放级别视觉反馈
-                updateScaleFeedback(scale);
-            }
-            
-            // 缩放到指定级别
-            function scaleTo(targetScale) {
-                currentScale = targetScale;
-                applyScale(targetScale);
-            }
-            
-            // 更新缩放级别视觉反馈
-            function updateScaleFeedback(scale) {
-                // 检查是否已经存在反馈元素
-                let feedbackElement = document.getElementById('scale-feedback');
-                
-                if (!feedbackElement) {
-                    feedbackElement = document.createElement('div');
-                    feedbackElement.id = 'scale-feedback';
-                    feedbackElement.style.position = 'fixed';
-                    feedbackElement.style.top = '20px';
-                    feedbackElement.style.right = '20px';
-                    feedbackElement.style.background = 'rgba(0, 0, 0, 0.7)';
-                    feedbackElement.style.color = 'white';
-                    feedbackElement.style.padding = '8px 12px';
-                    feedbackElement.style.borderRadius = '4px';
-                    feedbackElement.style.fontSize = '12px';
-                    feedbackElement.style.zIndex = '9999';
-                    feedbackElement.style.transition = 'opacity 0.3s ease';
-                    document.body.appendChild(feedbackElement);
-                }
-                
-                // 更新反馈内容
-                const scalePercentage = Math.round(scale * 100);
-                feedbackElement.textContent = `${scalePercentage}%`;
-                
-                // 显示反馈
-                feedbackElement.style.opacity = '1';
-                
-                // 3秒后隐藏反馈
-                clearTimeout(window.scaleFeedbackTimeout);
-                window.scaleFeedbackTimeout = setTimeout(() => {
-                    feedbackElement.style.opacity = '0';
-                }, 3000);
-                
-                // 在缩放至最大或最小时提供额外反馈
-                if (scale === maxScale) {
-                    showScaleLimitFeedback('已达到最大缩放级别');
-                } else if (scale === minScale) {
-                    showScaleLimitFeedback('已达到最小缩放级别');
-                }
-            }
-            
-            // 显示缩放限制反馈
-            function showScaleLimitFeedback(message) {
-                let limitFeedbackElement = document.getElementById('scale-limit-feedback');
-                
-                if (!limitFeedbackElement) {
-                    limitFeedbackElement = document.createElement('div');
-                    limitFeedbackElement.id = 'scale-limit-feedback';
-                    limitFeedbackElement.style.position = 'fixed';
-                    limitFeedbackElement.style.top = '50%';
-                    limitFeedbackElement.style.left = '50%';
-                    limitFeedbackElement.style.transform = 'translate(-50%, -50%)';
-                    limitFeedbackElement.style.background = 'rgba(0, 0, 0, 0.8)';
-                    limitFeedbackElement.style.color = 'white';
-                    limitFeedbackElement.style.padding = '12px 20px';
-                    limitFeedbackElement.style.borderRadius = '6px';
-                    limitFeedbackElement.style.fontSize = '14px';
-                    limitFeedbackElement.style.zIndex = '9999';
-                    limitFeedbackElement.style.transition = 'opacity 0.3s ease';
-                    document.body.appendChild(limitFeedbackElement);
-                }
-                
-                limitFeedbackElement.textContent = message;
-                limitFeedbackElement.style.opacity = '1';
-                
-                // 2秒后隐藏反馈
-                setTimeout(() => {
-                    limitFeedbackElement.style.opacity = '0';
-                }, 2000);
-            }
-            
-            // 重置缩放
-            window.resetScale = function() {
-                scaleTo(1);
-            };
-        })();
         
         // 主题切换功能
         function setupThemeToggle() {
@@ -530,6 +368,17 @@
     </style>
 </head>
 <body>
+    <!-- 装饰元素 -->
+    <div class="page-decoration page-decoration-left"></div>
+    <div class="page-decoration page-decoration-right"></div>
+    <div class="corner-decoration corner-top-left"></div>
+    <div class="corner-decoration corner-top-right"></div>
+    <div class="corner-decoration corner-bottom-left"></div>
+    <div class="corner-decoration corner-bottom-right"></div>
+    <div class="floating-decoration floating-decoration-1"></div>
+    <div class="floating-decoration floating-decoration-2"></div>
+    <div class="floating-decoration floating-decoration-3"></div>
+    
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
