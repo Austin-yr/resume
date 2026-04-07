@@ -188,6 +188,37 @@
             );
         }
         
+        // 侧边栏点击事件
+        function setupSidebarEvents() {
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // 检查是否有目标部分
+                    const target = this.getAttribute('data-target');
+                    if (target) {
+                        // 滚动到目标部分
+                        const targetElement = document.querySelector(target);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                    
+                    // 检查是否有链接
+                    const url = this.getAttribute('data-url');
+                    const targetBlank = this.getAttribute('target');
+                    if (url) {
+                        // 打开链接
+                        if (targetBlank === '_blank') {
+                            window.open(url, '_blank');
+                        } else {
+                            window.location.href = url;
+                        }
+                    }
+                });
+            });
+        }
+        
         // 渲染组件
         // 注意：这个函数会被后面的 window.onload 函数合并
     </script>
@@ -369,6 +400,58 @@
 </head>
 <body>
     <!-- 装饰元素 -->
+    <!-- 垂直装饰条 -->
+    <div class="vertical-decoration vertical-decoration-left"></div>
+    <div class="vertical-decoration vertical-decoration-right"></div>
+    
+    <!-- 固定侧边栏 -->
+    <div class="sidebar sidebar-left">
+      <div class="sidebar-item" data-target="#skills">
+        <i class="fas fa-code"></i>
+        <span>前端</span>
+      </div>
+      <div class="sidebar-item" data-target="#skills">
+        <i class="fas fa-server"></i>
+        <span>后端</span>
+      </div>
+      <div class="sidebar-item" data-target="#skills">
+        <i class="fas fa-database"></i>
+        <span>数据库</span>
+      </div>
+      <div class="sidebar-item" data-target="#skills">
+        <i class="fas fa-cloud"></i>
+        <span>云服务</span>
+      </div>
+      <div class="sidebar-item" data-target="#skills">
+        <i class="fas fa-mobile-alt"></i>
+        <span>移动</span>
+      </div>
+    </div>
+    
+    <div class="sidebar sidebar-right">
+      <div class="sidebar-item" data-target="#about">
+        <i class="fas fa-envelope"></i>
+        <span>邮箱</span>
+      </div>
+      <div class="sidebar-item" data-target="#about">
+        <i class="fas fa-phone"></i>
+        <span>电话</span>
+      </div>
+      <div class="sidebar-item" data-target="#about">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>地址</span>
+      </div>
+      <div class="sidebar-item" data-url="https://www.douyin.com/user/MS4wLjABAAAAISjwyoTEcRHI3vJzQbvgi7PoJrIRJ-Jgbt5_INED5eMQG6alHDiIbPPrAuwlQbZB?from_tab_name=main" target="_blank">
+        <i class="fas fa-music"></i>
+        <span>抖音</span>
+      </div>
+      <div class="sidebar-item" data-url="https://space.bilibili.com/491110422/dynamic" target="_blank">
+        <i class="fas fa-play-circle"></i>
+        <span>bilibili</span>
+      </div>
+    </div>
+    
+    <!-- 页面两侧装饰元素 -->
     <div class="page-decoration page-decoration-left"></div>
     <div class="page-decoration page-decoration-right"></div>
     <div class="corner-decoration corner-top-left"></div>
@@ -542,7 +625,9 @@
     <section id="skills" class="skills-section">
         <div class="section-bg"></div>
         <div class="container">
-            <h2 class="section-title">技能</h2>
+            <div class="section-title-container">
+                <h2 class="section-title">技能 <span class="section-subtitle">Skills</span></h2>
+            </div>
             
             <!-- 技能内容布局 -->
             <div class="skills-content">
@@ -617,7 +702,9 @@
     <!-- 工作经历区 -->
     <section id="experience" class="experience">
         <div class="container">
-            <h2 class="section-title">工作经历</h2>
+            <div class="section-title-container">
+                <h2 class="section-title">工作经历 <span class="section-subtitle">Work Experience</span></h2>
+            </div>
             <div class="timeline">
                 <div class="timeline-progress"></div>
                 <div class="timeline-item">
@@ -694,7 +781,9 @@
     <!-- 教育背景与证书荣誉区 -->
     <section id="education" class="education">
         <div class="container">
-            <h2 class="section-title">教育背景与证书荣誉</h2>
+            <div class="section-title-container">
+                <h2 class="section-title">教育背景与证书荣誉 <span class="section-subtitle">Education & Certificates</span></h2>
+            </div>
             
             <!-- 教育背景 -->
             <div class="education-container" style="margin-bottom: var(--spacing-16);">
@@ -888,7 +977,9 @@
     <!-- 项目经验区 -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">项目经验</h2>
+            <div class="section-title-container">
+                <h2 class="section-title">项目经验 <span class="section-subtitle">Project Experience</span></h2>
+            </div>
             <div class="projects-container">
                 <div class="project-card-3d">
                     <div class="card-3d-container">
@@ -972,7 +1063,9 @@
     <!-- 3D 项目展示区 -->
     <section id="3d-projects" class="projects-3d">
         <div class="container">
-            <h2 class="section-title" style="margin-bottom: -2;">项目展示</h2>
+            <div class="section-title-container" style="margin-bottom: -2;">
+                <h2 class="section-title">项目展示 <span class="section-subtitle">Project Showcase</span></h2>
+            </div>
             <div style="text-align: center; margin-bottom: 0; position: relative; z-index: 10;">
                 <div id="project-detail-container"></div>
             </div>
@@ -1045,7 +1138,9 @@
     <!-- Bento Grid 部分 -->
     <section id="bento" class="bento">
         <div class="container">
-            <h2 class="section-title">个人优势</h2>
+            <div class="section-title-container">
+                <h2 class="section-title">个人优势 <span class="section-subtitle">Personal Advantages</span></h2>
+            </div>
             <div class="bento-container">
                 <div class="bento-card large">
                     <div class="card-grid"></div>
@@ -2148,6 +2243,9 @@
                     themeToggleButton.style.border = '1px solid rgba(52, 152, 219, 0.3)';
                 }
             }
+            
+            // 初始化侧边栏事件
+            setupSidebarEvents();
         };
     </script>
 </body>
