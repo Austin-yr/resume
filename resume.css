@@ -773,12 +773,12 @@ html:not(.dark) .navbar.scrolled {
   
   /* 个人头像 */
   .hero-image {
-    flex: 0 0 60px;
+    flex: 0 0 40px;
   }
   
   .avatar {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
   }
   
   /* 重新排版个人简介区 */
@@ -799,8 +799,8 @@ html:not(.dark) .navbar.scrolled {
   
   /* 调整旋转技能图标的大小 */
   .orbiting-skills {
-    width: 400px !important;
-    height: 400px !important;
+    width: 300px !important;
+    height: 300px !important;
   }
   
   .orbiting-skills svg {
@@ -809,19 +809,19 @@ html:not(.dark) .navbar.scrolled {
   }
   
   .orbiting-skills circle {
-    r: 100 !important;
+    r: 60 !important;
   }
   
   .skill-icon {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
   
   .skill-icon i {
-    font-size: 24px !important;
+    font-size: 16px !important;
   }
   
   .skill-icon span {
-    font-size: 10px !important;
+    font-size: 8px !important;
   }
   
   /* 装饰元素响应式 */
@@ -901,30 +901,30 @@ html:not(.dark) .navbar.scrolled {
     
     /* 进一步调整小屏幕设备的头像和布局 */
     .hero-image {
-      flex: 0 0 50px;
+      flex: 0 0 33px;
     }
     
     .avatar {
-      width: 50px;
-      height: 50px;
+      width: 33px;
+      height: 33px;
     }
     
     /* 进一步调整旋转技能图标的大小 */
     .orbiting-skills {
-      width: 350px !important;
-      height: 350px !important;
+      width: 250px !important;
+      height: 250px !important;
     }
     
     .orbiting-skills circle {
-      r: 80 !important;
+      r: 50 !important;
     }
     
     .skill-icon i {
-      font-size: 20px !important;
+      font-size: 14px !important;
     }
     
     .skill-icon span {
-      font-size: 9px !important;
+      font-size: 7px !important;
     }
   }
   
