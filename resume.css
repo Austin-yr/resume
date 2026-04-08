@@ -799,8 +799,9 @@ html:not(.dark) .navbar.scrolled {
   
   /* 调整旋转技能图标的大小 */
   .orbiting-skills {
-    width: 300px !important;
-    height: 300px !important;
+    width: 150px !important;
+    height: 150px !important;
+    z-index: 1 !important;
   }
   
   .orbiting-skills svg {
@@ -809,19 +810,19 @@ html:not(.dark) .navbar.scrolled {
   }
   
   .orbiting-skills circle {
-    r: 50 !important;
+    r: 25 !important;
   }
   
   .skill-icon {
-    font-size: 12px !important;
+    font-size: 10px !important;
   }
   
   .skill-icon i {
-    font-size: 16px !important;
+    font-size: 14px !important;
   }
   
   .skill-icon span {
-    font-size: 8px !important;
+    font-size: 7px !important;
   }
   
   /* 装饰元素响应式 */
@@ -911,20 +912,21 @@ html:not(.dark) .navbar.scrolled {
     
     /* 进一步调整旋转技能图标的大小 */
     .orbiting-skills {
-      width: 150px !important;
-      height: 150px !important;
+      width: 120px !important;
+      height: 120px !important;
+      z-index: 1 !important;
     }
     
     .orbiting-skills circle {
-      r: 25 !important;
+      r: 20 !important;
     }
     
     .skill-icon i {
-      font-size: 14px !important;
+      font-size: 12px !important;
     }
     
     .skill-icon span {
-      font-size: 7px !important;
+      font-size: 6px !important;
     }
   }
   
