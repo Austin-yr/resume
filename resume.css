@@ -616,7 +616,7 @@ html:not(.dark) .navbar.scrolled {
     font-size: var(--font-size-lg);
     padding-left: 0;
     text-align: center;
-    transform: translateX(60px);
+    transform: translateX(-200px);
   }
   
   .hero-text h2::before {
@@ -772,7 +772,7 @@ html:not(.dark) .navbar.scrolled {
     font-size: var(--font-size-base);
     padding-left: 0;
     text-align: center;
-    transform: translateX(60px);
+    transform: translateX(-200px);
   }
   
   .hero-text h2::before {
