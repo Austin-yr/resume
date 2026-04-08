@@ -614,8 +614,8 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-text h2 {
     font-size: var(--font-size-lg);
-    padding-left: 0;
-    text-align: center;
+    padding-left: var(--spacing-4);
+    text-align: left;
   }
   
   .hero-text h2::before {
@@ -769,8 +769,8 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-text h2 {
     font-size: var(--font-size-base);
-    padding-left: 0;
-    text-align: center;
+    padding-left: var(--spacing-4);
+    text-align: left;
   }
   
   .hero-text h2::before {
