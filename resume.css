@@ -609,10 +609,25 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-text h1 {
     font-size: var(--font-size-3xl);
+    display: block;
   }
   
   .hero-text h2 {
     font-size: var(--font-size-lg);
+    padding-left: 0;
+    text-align: center;
+  }
+  
+  .hero-text h2::before {
+    display: none;
+  }
+  
+  .hero-text p {
+    padding-left: 0;
+    border-left: none;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .contact-info {
@@ -749,14 +764,26 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-text h1 {
     font-size: var(--font-size-2xl);
+    display: block;
   }
   
   .hero-text h2 {
     font-size: var(--font-size-base);
+    padding-left: 0;
+    text-align: center;
+  }
+  
+  .hero-text h2::before {
+    display: none;
   }
   
   .hero-text p {
     font-size: var(--font-size-sm);
+    padding-left: 0;
+    border-left: none;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .social-links {
