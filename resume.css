@@ -609,26 +609,10 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-text h1 {
     font-size: var(--font-size-3xl);
-    display: block;
   }
   
   .hero-text h2 {
     font-size: var(--font-size-lg);
-    padding-left: 0;
-    text-align: center;
-    transform: translateX(-200px);
-  }
-  
-  .hero-text h2::before {
-    display: none;
-  }
-  
-  .hero-text p {
-    padding-left: 0;
-    border-left: none;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
   
   .contact-info {
@@ -765,27 +749,14 @@ html:not(.dark) .navbar.scrolled {
   
   .hero-text h1 {
     font-size: var(--font-size-2xl);
-    display: block;
   }
   
   .hero-text h2 {
     font-size: var(--font-size-base);
-    padding-left: 0;
-    text-align: center;
-    transform: translateX(-200px);
-  }
-  
-  .hero-text h2::before {
-    display: none;
   }
   
   .hero-text p {
     font-size: var(--font-size-sm);
-    padding-left: 0;
-    border-left: none;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
   
   .social-links {
@@ -826,33 +797,9 @@ html:not(.dark) .navbar.scrolled {
     margin-left: 0 !important;
   }
   
-  /* 调整旋转技能图标的大小 */
+  /* 隐藏旋转技能图标 */
   .orbiting-skills {
-    width: 100px !important;
-    height: 100px !important;
-  }
-  
-  .orbiting-skills svg {
-    width: 100% !important;
-    height: 100% !important;
-  }
-  
-  .orbiting-skills circle {
-    r: 16.67 !important;
-  }
-  
-  .skill-icon {
-    font-size: 8px !important;
-    width: 60px !important;
-    height: 60px !important;
-  }
-  
-  .skill-icon i {
-    font-size: 12px !important;
-  }
-  
-  .skill-icon span {
-    font-size: 6px !important;
+    display: none !important;
   }
   
   /* 装饰元素响应式 */
@@ -940,28 +887,9 @@ html:not(.dark) .navbar.scrolled {
       height: 33px;
     }
     
-    /* 进一步调整旋转技能图标的大小 */
+    /* 隐藏旋转技能图标 */
     .orbiting-skills {
-      width: 80px !important;
-      height: 80px !important;
-    }
-    
-    .orbiting-skills circle {
-      r: 13.33 !important;
-    }
-    
-    .skill-icon {
-      font-size: 6px !important;
-      width: 40px !important;
-      height: 40px !important;
-    }
-    
-    .skill-icon i {
-      font-size: 10px !important;
-    }
-    
-    .skill-icon span {
-      font-size: 5px !important;
+      display: none !important;
     }
   }
   
